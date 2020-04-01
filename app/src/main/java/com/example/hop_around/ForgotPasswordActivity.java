@@ -7,34 +7,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
-public class CreateAccountActivity extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
-
+        setContentView(R.layout.activity_forgot_password);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Create Account");
+        actionBar.setTitle("Forgot Password");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        TextView termsAndServices = (TextView) findViewById(R.id.terms_and_services);
-        termsAndServices.setOnClickListener(new View.OnClickListener() {
+        Button send = (Button) findViewById(R.id.send_pass_btn);
+        send.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
-
-                Intent myIntent = new Intent(CreateAccountActivity.this, TermsAndServices.class);
-                startActivity(myIntent);
-
+            public void onClick(View view) {
+                finish();
             }
         });
-
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
