@@ -27,19 +27,20 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyCUFq-P_ICHn7pZhCXkZd8yB1wCr2ttEO8" />
 
         <activity
-            android:name=".MapsView">
-
-        </activity>
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LogInActivity">
+            android:name=".MapsView"
+            android:label="Map">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".LogInActivity">
+
         </activity>
     </application>
 
