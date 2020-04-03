@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "448078025953",
+    "firebase_url": "https://hop-around-a3316.firebaseio.com",
+    "project_id": "hop-around-a3316",
+    "storage_bucket": "hop-around-a3316.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448078025953:android:5d64cf6c13cc0f2ff853a0",
+        "android_client_info": {
+          "package_name": "com.example.hop_around"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448078025953-ap0g4795oimo8jnq9huuslg70cndu8tn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGNa0U1NaDLevEByLgIWrTHABhju4urF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448078025953-ap0g4795oimo8jnq9huuslg70cndu8tn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

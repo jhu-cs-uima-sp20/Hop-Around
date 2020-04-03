@@ -1,0 +1,117 @@
+[33mcommit 1114c69b5229e367da6789fba8b97f17f815abd7[m[33m ([m[1;36mHEAD -> [m[1;32mdb[m[33m, [m[1;31morigin/db[m[33m)[m
+Author: Jchen <52466356+Flyingsledge@users.noreply.github.com>
+Date:   Wed Apr 1 23:33:06 2020 -0400
+
+    Added files for firebase and edited gradles
+
+[33mcommit eb38c83f99ee38c22a307b5beb672229400be13a[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: 61434b6 ebc6cda
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 14:38:33 2020 -0400
+
+    Merge pull request #16 from jhu-cs-uima-sp20/login_functions
+    
+    Basic frames for Log In and Create Activity
+
+[33mcommit ebc6cda4efc9a948102025d7ee65d62367b59a9f[m
+Author: Caroline Reynolds <carolinereynolds@carolines-air.home>
+Date:   Tue Mar 31 14:34:08 2020 -0400
+
+    Basic frames for Log In and Create Activity
+
+[33mcommit 61434b6bf8960942cfb0f67dbbd96a4c8a46ea5f[m
+Merge: f023328 bb48d5f
+Author: Caroline Reynolds <carolinereynolds@carolines-air.home>
+Date:   Tue Mar 31 12:22:20 2020 -0400
+
+    Merge branch 'master' of https://github.com/jhu-cs-uima-sp20/Hop-Around
+
+[33mcommit f023328e3e56ea70ff8ca85ffef8f67198f9c966[m
+Author: Caroline Reynolds <carolinereynolds@carolines-air.home>
+Date:   Tue Mar 31 12:22:03 2020 -0400
+
+    Setting up initial android studio project file structure with an empty activity
+
+[33mcommit bb48d5fa2b0ef4a2e654b0b395453974811c5f31[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:13:23 2020 -0400
+
+    Delete Hop-Around.iml
+
+[33mcommit fa45cb2decfc5ddd6285bb2527d9c1f8daf8fe1a[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:13:14 2020 -0400
+
+    Delete build.gradle
+
+[33mcommit 89ae1728511a1debced607e7eb473174f2de50ac[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:13:04 2020 -0400
+
+    Delete gradle.properties
+
+[33mcommit 86dfca0416a0673cda125034f7bbb78119ce3f1f[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:12:53 2020 -0400
+
+    Delete gradlew
+
+[33mcommit 066a3d510b3f5731727f8373adc47bc9d4c6144d[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:12:41 2020 -0400
+
+    Delete gradle-wrapper.jar
+
+[33mcommit c1ed8d7054898ba710a4a1ad2161367bfc827b67[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:12:32 2020 -0400
+
+    Delete gradle-wrapper.properties
+
+[33mcommit 17b3942444c0ebad558f29eabb3c253c232ee709[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:12:19 2020 -0400
+
+    Delete gradlew.bat
+
+[33mcommit f8e22dba798a1d3d57e36552c8164a67d76e486d[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:12:01 2020 -0400
+
+    Delete local.properties
+
+[33mcommit bb22be6e1c7b7b6ec3693fca166e424732e4086e[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:11:51 2020 -0400
+
+    Delete settings.gradle
+
+[33mcommit 008fde79a3f383dcf0144fd345a2eeada6162def[m
+Author: ckrmd <33043599+ckrmd@users.noreply.github.com>
+Date:   Tue Mar 31 12:09:53 2020 -0400
+
+    Add files via upload
+
+[33mcommit 1f3ea645df22f7c7e60fcda6b8737147ca1405be[m
+Author: Jodie Hoh <jodiehoh@gmail.com>
+Date:   Mon Mar 30 11:07:39 2020 -0700
+
+    Update Meeting_Notes
+
+[33mcommit 4d43918c149992e045175fad998deb09a01caa01[m
+Author: Jodie Hoh <jodiehoh@gmail.com>
+Date:   Mon Mar 30 10:57:43 2020 -0700
+
+    Update Meeting_Notes
+
+[33mcommit 3f16a86d938cd4aba19e7dd4867a53eb94643b1c[m
+Author: Jodie Hoh <jodiehoh@gmail.com>
+Date:   Mon Mar 30 10:14:57 2020 -0700
+
+    Create Meeting_Notes
+
+[33mcommit 5e87b368cb634f319424c82b66f33869957494be[m
+Author: Jchen <52466356+Flyingsledge@users.noreply.github.com>
+Date:   Thu Feb 27 18:29:58 2020 -0500
+
+    Initial commit
