@@ -58,6 +58,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                 else if (newEmail.equals("user@jhu.edu")) {
                     newEmailTV.setError("An account with this email already exists");
                 }
+                else if (!newEmail.substring(newEmail.length()-7).equals("@jhu.edu")) {
+                    newEmailTV.setError("Must be a valid @jhu.edu address");
+                }
                 //Passwords do not match
                 else if (!newPass.equals(confirmPass)){
                     newPassTV.setError("Passwords do not match");
