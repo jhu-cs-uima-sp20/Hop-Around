@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -40,12 +41,38 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //TODO DATABASE @Jerry, need add new account to DB/check that email hasn't already been registered (error handling)
                     //TODO maybe also have a requirement for passwords, and check that req is met?
 
-                //
-            Intent myIntent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
-            startActivity(myIntent);
+
+                EditText newEmailTV = (EditText) findViewById(R.id.new_email_editText);
+                EditText newPassTV = (EditText) findViewById(R.id.new_password_editText);
+                EditText newPassConfirmTV = (EditText) findViewById(R.id.confirm_password_editText);
+                String newEmail = newEmailTV.getText().toString().trim();
+                String newPass = newPassTV.getText().toString().trim();
+                String confirmPass = newPassConfirmTV.getText().toString().trim();
+
+                //TODO DATABASE @Jerry, need add new account to DB/check that email hasn't already been registered (error handling)
+                if (newEmail.length() == 0){
+                    newEmailTV.setError("This field cannot be empty");
+                }
+                else if (newEmail.equals("user@jhu.edu")) {
+                    newEmailTV.setError("An account with this email already exists");
+                }
+                //Passwords do not match
+                else if (!newPass.equals(confirmPass)){
+                    newPassTV.setError("Passwords do not match");
+                    newPassConfirmTV.setError("Passwords do not match");
+                }
+                else if (newPass.length() == 0){
+                    newPassTV.setError("This field cannot be empty");
+                    newPassConfirmTV.setError("This field cannot be empty");
+                }
+                else {
+                    //TODO @Jerry add to DB
+
+                    Intent myIntent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
+                    startActivity(myIntent);
+                }
 
             }
         });
