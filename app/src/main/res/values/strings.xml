@@ -16,4 +16,12 @@
     <string name="display_name">Display Name</string>
     <string name="next">Next</string>
     <string name="continue_btn">Continue</string>
+    <string name="map">Map</string>
+    <string name="my_collection">My Collection</string>
+    <string name="daily_page">Daily page</string>
+    <string name="profile">Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="hop_points">Hop Points</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 </resources>
