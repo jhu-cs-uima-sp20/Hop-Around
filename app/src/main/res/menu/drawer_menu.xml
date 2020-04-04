@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_map"
+            android:title="@string/map" />
+        <item
+            android:id="@+id/nav_collection"
+            android:icon="@drawable/ic_collections"
+            android:title="@string/my_collection" />
+        <item
+            android:id="@+id/nav_daily_page"
+            android:icon="@drawable/ic_star"
+            android:title="@string/daily_page" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_shutdown"
+            android:title="@string/log_out" />
+    </group>
 </menu>
