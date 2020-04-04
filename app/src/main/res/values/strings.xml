@@ -7,6 +7,9 @@
     <string name="create_account">Create An Account</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account_btn">Create Account</string>
+
+    <string name="API_key_1">AIzaSyCUFq-P_ICHn7pZhCXkZd8yB1wCr2ttEO8</string>
+
     <string name="by_creating">By creating an account, you are agreeing to our</string>
     <string name="terms_and_services">Terms and Services</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -24,4 +27,5 @@
     <string name="hop_points">Hop Points</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
+
 </resources>
