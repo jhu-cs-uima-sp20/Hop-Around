@@ -37,7 +37,7 @@
 
         <activity
             android:name=".MapsView"
-            android:label="Map">
+            android:label="Map"/>
 
         <activity
             android:name=".CollectionActivity"
@@ -58,8 +58,6 @@
         <activity android:name=".SetUpAccountActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".TermsAndServices" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LogInActivity" />
 
     </application>
 
