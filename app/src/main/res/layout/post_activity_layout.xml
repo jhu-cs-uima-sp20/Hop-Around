@@ -8,82 +8,6 @@
     android:layout_height="wrap_content">
 
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip8"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:text="Animals"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/btnDone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chip7"
-        app:layout_constraintTop_toBottomOf="@+id/chip5" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip7"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:text="Random"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/btnDone"
-        app:layout_constraintEnd_toStartOf="@+id/chip8"
-        app:layout_constraintStart_toEndOf="@+id/chip6"
-        app:layout_constraintTop_toBottomOf="@+id/chip3" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip6"
-        android:layout_width="wrap_content"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        android:text="People"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/btnDone"
-        app:layout_constraintEnd_toStartOf="@+id/chip7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip4" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip5"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="18dp"
-        android:text="Bird"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/chip8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chip3"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip4"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        android:text="Dog"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/chip6"
-        app:layout_constraintEnd_toStartOf="@+id/chip3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -91,59 +15,37 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="59dp"
         android:layout_marginBottom="12dp"
-        android:text="Enter your Mobile and Password"
-        app:layout_constraintBottom_toTopOf="@+id/inMobile"
+        android:text="Add PopUp"
+        app:layout_constraintBottom_toTopOf="@+id/popUpName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/inMobile"
-        android:layout_width="294dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="Mobile Number"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+
 
     <EditText
-        android:id="@+id/inPassword"
+        android:id="@+id/popUpName"
         android:layout_width="296dp"
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:hint="Popup Name"
-        android:inputType="textPassword"
+        android:inputType="textCapWords"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inMobile" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
         android:id="@+id/btnDone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="16dp"
         android:text="Post"
+        android:backgroundTint="@color/lightBlue"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip7" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip3"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:text="Squirrels"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/chip7"
-        app:layout_constraintEnd_toStartOf="@+id/chip5"
-        app:layout_constraintStart_toEndOf="@+id/chip4"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
     <TextView
         android:id="@+id/textView"
@@ -155,15 +57,93 @@
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/popUpName" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="290dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="16dp"
+        app:chipSpacing="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:singleSelection="true"
+        >
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/Dog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dog"
+            app:chipEndPadding="12dp"
+            app:chipStartPadding="12dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/Squirrels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Squirrels"
+            app:chipEndPadding="12dp"
+            app:chipStartPadding="12dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/Bird"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bird"
+            app:chipEndPadding="12dp"
+            app:chipStartPadding="12dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/People"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="People"
+            app:chipEndPadding="8dp"
+            app:chipStartPadding="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/Random"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Random"
+            app:chipEndPadding="8dp"
+            app:chipStartPadding="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/Animals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Animals"
+            app:chipEndPadding="8dp"
+            app:chipStartPadding="8dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+    </com.google.android.material.chip.ChipGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

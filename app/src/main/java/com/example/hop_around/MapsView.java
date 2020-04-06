@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,6 +45,9 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
         FragmentManager fm = getSupportFragmentManager();
         PostActivity postFragmentDialog = PostActivity.newInstance("Some title");
         postFragmentDialog.show(fm, "fragment_edit");
+
+        //inal EditText popUpName = findViewById(R.id.popUpName);
+
     }
 
     /**
