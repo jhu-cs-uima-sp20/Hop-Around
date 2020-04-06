@@ -17,6 +17,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 public class PostActivity extends DialogFragment implements TextView.OnEditorActionListener {
+
+    public void PostActivity() {
+
+    }
+
+    public static PostActivity newInstance(String title) {
+        PostActivity frag = new PostActivity();
+        Bundle args = new Bundle();
+        args.putString("title", title);
+        frag.setArguments(args);
+        return frag;
+    }
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package com.example.hop_around;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,11 +35,16 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
             public void onClick(View view) {
                 //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                        // .setAction("Action", null).show();
-                startActivity(new Intent(MapsView.this, PostActivity.class));
+                showPostDialog();
             }
         });
     }
 
+    private void showPostDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        PostActivity postFragmentDialog = PostActivity.newInstance("Some title");
+        postFragmentDialog.show(fm, "fragment_edit");
+    }
 
     /**
      * Manipulates the map once available.
