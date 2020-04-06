@@ -52,6 +52,7 @@ public class PostActivity extends DialogFragment implements TextView.OnEditorAct
 
         dummyPhone.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
     }
 
