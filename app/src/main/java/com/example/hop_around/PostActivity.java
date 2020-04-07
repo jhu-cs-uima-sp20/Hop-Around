@@ -77,6 +77,15 @@ public class PostActivity extends DialogFragment {
         //popUpName.setOnEditorActionListener(this);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        postImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,
+                        CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
+        });
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,15 +99,7 @@ public class PostActivity extends DialogFragment {
                         }
                     }
                 });
-                postImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent,
-                                CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                    }
-                });
                 //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
                 //popUpName.getText().toString()
                 dismiss();
