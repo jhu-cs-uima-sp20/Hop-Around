@@ -75,6 +75,9 @@ public class LogInActivity extends AppCompatActivity {
                             User user = (User) o;
                             if (user.getPassword().equals(password)){
                                 //TODO: Launch the map activity or whatever happens next here! This onDataChange is what's supposed to occur in the line marked below
+                                //TODO launching isn't working
+                                Intent startMap = new Intent(LogInActivity.this, MapsView.class);
+                                startActivity(startMap);
                             }
                             else{
                                 EditText emailTV = (EditText) findViewById(R.id.email_editText);
@@ -105,10 +108,13 @@ public class LogInActivity extends AppCompatActivity {
                 }
                 //logged in correctly
                 else {
-                    //TODO launch MAP Activity, maybe in meantime launch to their profile?
 
                     //See the declaration of the ValueEventListener above
                     user_found.addListenerForSingleValueEvent(userListListener);
+
+                    //TODO uncomment here for testing
+                    //Intent startMap = new Intent(LogInActivity.this, CollectionActivity.class);
+                    //startActivity(startMap);
                 }
 
             }

@@ -27,5 +27,8 @@
     <string name="hop_points">Hop Points</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="hop_points_profile">Hop Points:</string>
+    <string name="hop_points_number">0</string>
+    <string name="collection_on_profile">\'s Recently Collected</string>
 
 </resources>
