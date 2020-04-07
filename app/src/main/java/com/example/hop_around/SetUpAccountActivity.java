@@ -42,10 +42,8 @@ public class SetUpAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //TODO ensure profile is done being created (values in all the text fields)
-                //TODO then launch into map activity!
-                //Intent next = new Intent(SetUpAccountActivity.this, MapsView.class);
-                //startActivity(next);
+                Intent next = new Intent(SetUpAccountActivity.this, LogInActivity.class);
+                startActivity(next);
             }
         });
 
@@ -67,8 +65,8 @@ public class SetUpAccountActivity extends AppCompatActivity {
 
                 //TODO ensure profile is done being created (values in all the text fields)
                 //TODO then launch into map activity!
-                //Intent next = new Intent(SetUpAccountActivity.this, TODOMapView.class);
-                //startActivity(next);
+                Intent next = new Intent(SetUpAccountActivity.this, LogInActivity.class);
+                startActivity(next);
             }
         });
     }

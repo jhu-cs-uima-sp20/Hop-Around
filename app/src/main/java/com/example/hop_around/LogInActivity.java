@@ -63,6 +63,8 @@ public class LogInActivity extends AppCompatActivity {
                 final String password = passwordTV.getText().toString().trim();
 
 
+
+                /*
                 //important references
                 DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference user_found = dbRoot.child("users");
@@ -100,21 +102,31 @@ public class LogInActivity extends AppCompatActivity {
                     }
                 };
 
+                */
+
                 if (email.length() == 0){
                     emailTV.setError("This field cannot be empty");
                 }
                 if (password.length() == 0) {
                     passwordTV.setError("This field cannot be empty");
                 }
+                else if (!email.equals("user@jhu.edu")) {
+                    emailTV.setError("Invalid Username or Password");
+                    passwordTV.setError("Invalid Username or Password");
+                }
+                else if (!password.equals("password")) {
+                    emailTV.setError("Invalid Username or Password");
+                    passwordTV.setError("Invalid Username or Password");
+                }
                 //logged in correctly
                 else {
 
                     //See the declaration of the ValueEventListener above
-                    user_found.addListenerForSingleValueEvent(userListListener);
+                    //user_found.addListenerForSingleValueEvent(userListListener);
 
                     //TODO uncomment here for testing
-                    //Intent startMap = new Intent(LogInActivity.this, CollectionActivity.class);
-                    //startActivity(startMap);
+                    Intent startMap = new Intent(LogInActivity.this, CollectionActivity.class);
+                    startActivity(startMap);
                 }
 
             }
