@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hop_around">
-
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
 
     <application
         android:allowBackup="true"
@@ -21,8 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".MapNavigation"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -37,33 +40,17 @@
 
         <activity
             android:name=".MapsView"
-            android:label="Map">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:label="Map"></activity>
         <activity
             android:name=".CollectionActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LogInActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".LogInActivity"></activity>
         <activity android:name=".EditProfilePhotoActivity" />
         <activity android:name=".SetUpAccountActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".TermsAndServices" />
-        <activity android:name=".PostActivity"/>
-
+        <activity android:name=".PostActivity" />
     </application>
 
 </manifest>
