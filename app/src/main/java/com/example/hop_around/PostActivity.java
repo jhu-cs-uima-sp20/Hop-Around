@@ -24,6 +24,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -123,6 +125,19 @@ public class PostActivity extends DialogFragment {
                                 .icon(BitmapDescriptorFactory.fromBitmap(image)));
 
                         marker.setTag(0);
+
+                        MapsView.mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+
+                            @Override
+                            public void onMapClick(LatLng destination) {
+
+                                MarkerOptions options = new MarkerOptions();
+                                options.position(destination);
+                                options.title("Lat=" + destination.latitude + ", Long=" + destination.longitude);
+                                Marker marker = MapsView.mMap.addMarker(options);
+                                MapsView.mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+                            }
+                        });
                     }
                 });
 
