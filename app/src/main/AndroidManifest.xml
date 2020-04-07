@@ -38,17 +38,19 @@
             android:label="Map"
             android:theme="@style/AppTheme.NoActionBar">
 
+
+        </activity>
+        <activity
+            android:name=".CollectionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".CollectionActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LogInActivity"></activity>
         <activity android:name=".EditProfilePhotoActivity" />
         <activity android:name=".SetUpAccountActivity" />
         <activity android:name=".ForgotPasswordActivity" />
