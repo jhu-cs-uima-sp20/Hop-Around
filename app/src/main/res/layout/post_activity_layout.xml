@@ -12,15 +12,10 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="59dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="124dp"
         android:text="Add PopUp"
         app:layout_constraintBottom_toTopOf="@+id/popUpName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/popUpName"
@@ -145,5 +140,19 @@
             android:focusable="true"
             app:chipBackgroundColor="@color/bg_chip_state_list"/>
     </com.google.android.material.chip.ChipGroup>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="240dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
