@@ -77,6 +77,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                             Intent myIntent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
                             startActivity(myIntent);
+                            //TODO nothing is actually launching...
                         }
                         else {
                             EditText newEmailTV = (EditText) findViewById(R.id.new_email_editText);
@@ -93,7 +94,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 if (newEmail.length() == 0) {
                     newEmailTV.setError("This field cannot be empty");
-                } else if (!newEmail.substring(newEmail.length() - 7).equals("@jhu.edu")) {
+                } else if ( newEmail.length() < 9 || !newEmail.substring(newEmail.length() - 8).equals("@jhu.edu")) {
                     newEmailTV.setError("Must be a valid @jhu.edu address");
                 }
                 //Passwords do not match

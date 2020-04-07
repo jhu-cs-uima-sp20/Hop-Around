@@ -44,7 +44,7 @@ public class SetUpAccountActivity extends AppCompatActivity {
 
                 //TODO ensure profile is done being created (values in all the text fields)
                 //TODO then launch into map activity!
-                //Intent next = new Intent(SetUpAccountActivity.this, TODO.class);
+                //Intent next = new Intent(SetUpAccountActivity.this, MapsView.class);
                 //startActivity(next);
             }
         });

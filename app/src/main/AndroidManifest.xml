@@ -17,10 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".ProfileActivity"></activity>
+
         <activity
             android:name=".MapNavigation"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -34,23 +38,27 @@
             android:value="AIzaSyCUFq-P_ICHn7pZhCXkZd8yB1wCr2ttEO8" />
 
         <activity
-            android:name=".MapsView"
-            android:label="Map"
-            android:theme="@style/AppTheme.NoActionBar">
 
-
-        </activity>
-        <activity
-            android:name=".CollectionActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".LogInActivity">
+            android:name=".LogInActivity"
+            android:label="LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MapsView"
+            android:label="Map"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".CollectionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateAccountActivity" />
+
+
         <activity android:name=".EditProfilePhotoActivity" />
         <activity android:name=".SetUpAccountActivity" />
         <activity android:name=".ForgotPasswordActivity" />
