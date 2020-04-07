@@ -48,24 +48,24 @@
 
     <TextView
         android:id="@+id/create_account_textView"
-        android:layout_width="85dp"
-        android:layout_height="19dp"
+        android:layout_width="130dp"
+        android:layout_height="22dp"
         android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="@string/create_account"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/forgot_password_textView"
-        android:layout_width="83dp"
-        android:layout_height="19dp"
+        android:layout_width="129dp"
+        android:layout_height="22dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="@string/forgot_password"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/create_account_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
