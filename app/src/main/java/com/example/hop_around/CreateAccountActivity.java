@@ -106,7 +106,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                     newPassConfirmTV.setError("This field cannot be empty");
                 } else {
                     //SEE userListListener above
-                    user_found.addListenerForSingleValueEvent(userListListener);
+                    //user_found.addListenerForSingleValueEvent(userListListener);
+                    Intent intent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
+                    startActivity(intent);
                 }
 
             }
