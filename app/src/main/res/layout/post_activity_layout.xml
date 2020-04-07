@@ -36,7 +36,8 @@
         android:layout_marginTop="7dp"
         android:layout_marginEnd="16dp"
         android:text="Post"
-        android:backgroundTint="@color/lightBlue"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +79,7 @@
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:textColor="@color/colorWhite"
             app:chipBackgroundColor="@color/bg_chip_state_list"/>
 
         <com.google.android.material.chip.Chip
@@ -90,6 +92,7 @@
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:textColor="@color/colorWhite"
             app:chipBackgroundColor="@color/bg_chip_state_list"/>
 
         <com.google.android.material.chip.Chip
@@ -102,6 +105,7 @@
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:textColor="@color/colorWhite"
             app:chipBackgroundColor="@color/bg_chip_state_list"/>
 
         <com.google.android.material.chip.Chip
@@ -114,6 +118,7 @@
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:textColor="@color/colorWhite"
             app:chipBackgroundColor="@color/bg_chip_state_list"/>
 
         <com.google.android.material.chip.Chip
@@ -126,6 +131,7 @@
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:textColor="@color/colorWhite"
             app:chipBackgroundColor="@color/bg_chip_state_list"/>
 
         <com.google.android.material.chip.Chip
@@ -138,6 +144,7 @@
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:textColor="@color/colorWhite"
             app:chipBackgroundColor="@color/bg_chip_state_list"/>
     </com.google.android.material.chip.ChipGroup>
 
