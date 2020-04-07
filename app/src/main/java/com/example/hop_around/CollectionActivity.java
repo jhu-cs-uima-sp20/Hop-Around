@@ -46,6 +46,10 @@ public class CollectionActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.nav_map:
+                break;
+        }
         return false;
     }
 }
