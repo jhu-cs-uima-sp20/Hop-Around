@@ -24,6 +24,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -33,6 +37,8 @@ import java.text.DecimalFormat;
 
 public class PostActivity extends DialogFragment {
     ImageView postImg;
+
+    Bitmap image;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
    /* public interface PopupNameDialogListener {
@@ -72,7 +78,7 @@ public class PostActivity extends DialogFragment {
         String title = getArguments().getString("title", "Post Popup");
         final ChipGroup tags = view.findViewById(R.id.chipGroup);
         getDialog().setTitle(title);
-        postImg  = view.findViewById(R.id.imageView2);
+        postImg = view.findViewById(R.id.imageView2);
         postImg.setClickable(true);
         popUpName.requestFocus();
         //popUpName.setOnEditorActionListener(this);
@@ -90,12 +96,12 @@ public class PostActivity extends DialogFragment {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String popUpTitle = popUpName.getText().toString();
+                final String popUpTitle = popUpName.getText().toString();
                 tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(ChipGroup group, int checkedId) {
                         Chip chip = group.findViewById(checkedId);
-                        if(chip != null){
+                        if (chip != null) {
                             String chipTagSelected = chip.getText().toString();
                         }
 
@@ -106,15 +112,17 @@ public class PostActivity extends DialogFragment {
 
                         DecimalFormat df = new DecimalFormat(".######");
                         double diffX = maxX - minX;
-                        double randomValueX = minX + Math.random( ) * diffX;
+                        double randomValueX = minX + Math.random() * diffX;
 
                         double diffY = maxY - minY;
-                        double randomValueY = minY + Math.random( ) * diffY;
+                        double randomValueY = minY + Math.random() * diffY;
 
+                        Marker marker = MapsView.mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(randomValueX, randomValueY))
+                                .title(popUpTitle)
+                                .icon(BitmapDescriptorFactory.fromBitmap(image)));
 
-                        System.out.println(df.format(randomValueX));
-                        System.out.println(df.format(randomValueY));
-
+                        marker.setTag(0);
                     }
                 });
 
@@ -145,10 +153,10 @@ public class PostActivity extends DialogFragment {
 
                 // convert byte array to Bitmap
 
-                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
+                image = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
 
-                postImg.setImageBitmap(bitmap);
+                postImg.setImageBitmap(image);
 
             }
         }

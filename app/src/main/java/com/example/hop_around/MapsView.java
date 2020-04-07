@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class MapsView extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    public static GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
