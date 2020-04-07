@@ -1,5 +1,6 @@
 package com.example.hop_around;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -17,7 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-public class MapsView extends FragmentActivity implements OnMapReadyCallback {
+public class MapsView extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
