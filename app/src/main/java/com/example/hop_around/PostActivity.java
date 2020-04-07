@@ -28,6 +28,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DecimalFormat;
 
 
 public class PostActivity extends DialogFragment {
@@ -97,6 +98,23 @@ public class PostActivity extends DialogFragment {
                         if(chip != null){
                             String chipTagSelected = chip.getText().toString();
                         }
+
+                        double maxX = 39.333977;
+                        double minX = 39.326170;
+                        double minY = -76.624140;
+                        double maxY = -76.618813;
+
+                        DecimalFormat df = new DecimalFormat(".######");
+                        double diffX = maxX - minX;
+                        double randomValueX = minX + Math.random( ) * diffX;
+
+                        double diffY = maxY - minY;
+                        double randomValueY = minY + Math.random( ) * diffY;
+
+
+                        System.out.println(df.format(randomValueX));
+                        System.out.println(df.format(randomValueY));
+
                     }
                 });
 
