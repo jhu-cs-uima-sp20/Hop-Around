@@ -65,14 +65,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                 final String newPass = newPassTV.getText().toString().trim();
                 String confirmPass = newPassConfirmTV.getText().toString().trim();
 
+                //userID exists because json database doesn't allow '.' in keys for some reason
+                final String userID = newEmail.substring(0, newEmail.length()-8);
+
                 final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference userRef = dbRoot.child("users");
-/*
+
                 ValueEventListener userListListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (!dataSnapshot.hasChild(newEmail)) {
-                            writeNewUser(newEmail, newPass, "Temporary Placeholder", dbRoot);
+                        System.out.println("TESTING");
+                        if (!dataSnapshot.hasChild(userID)) {
+                            writeNewUser(userID, newPass, "Temporary Placeholder", dbRoot);
 
                             Intent myIntent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
                             startActivity(myIntent);
@@ -89,7 +93,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                     }
                 };
-*/
+
 
                 if (newEmail.length() == 0) {
                     newEmailTV.setError("This field cannot be empty");
@@ -105,12 +109,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                     newPassConfirmTV.setError("This field cannot be empty");
                 } else {
                     //TODO THIS
-                    //userRef.addListenerForSingleValueEvent(userListListener);
-                    String userID = newEmail.substring(0, newEmail.length()-8);
-                    writeNewUser(userID, newPass, "Temporary Placeholder", dbRoot);
+                    userRef.addListenerForSingleValueEvent(userListListener);
 
-                    Intent intent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
-                    startActivity(intent);
+                    //writeNewUser(userID, newPass, "Temporary Placeholder", dbRoot);
+
+                    //Intent intent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
+                    //startActivity(intent);
                 }
 
             }
