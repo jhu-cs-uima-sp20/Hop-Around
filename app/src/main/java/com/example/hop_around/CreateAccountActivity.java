@@ -66,7 +66,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String confirmPass = newPassConfirmTV.getText().toString().trim();
 
                 //userID exists because json database doesn't allow '.' in keys for some reason
-                final String userID = newEmail.substring(0, newEmail.length()-8);
+                final String userID = newEmail.substring(0, newEmail.length() - 8);
 
                 final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference userRef = dbRoot.child("users");
@@ -74,19 +74,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                 ValueEventListener userListListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        System.out.println("TESTING");
                         if (!dataSnapshot.hasChild(userID)) {
                             writeNewUser(userID, newPass, "Temporary Placeholder", dbRoot);
-
+                            //HAHAHAHAHAHAHA IT WORKS JESUS CHRIST. YESSSSSS YYESSSSSSSSSSSSS HAHAhAHAHAHAEFBWFBSJKBFSKHF BHKSJFWBJ
                             Intent myIntent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
                             startActivity(myIntent);
-                            //TODO nothing is actually launching...
-                        }
-                        else {
+                        } else {
                             EditText newEmailTV = (EditText) findViewById(R.id.new_email_editText);
-                            newEmailTV.setError("An Account associated with this email already exists");
+                            newEmailTV.setError("An account associated with this email already exists");
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         final String TAG = "CreateAccountActivity";
@@ -97,7 +95,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 if (newEmail.length() == 0) {
                     newEmailTV.setError("This field cannot be empty");
-                } else if ( newEmail.length() < 9 || !newEmail.substring(newEmail.length() - 8).equals("@jhu.edu")) {
+                } else if (newEmail.length() < 9 || !newEmail.substring(newEmail.length() - 8).equals("@jhu.edu")) {
                     newEmailTV.setError("Must be a valid @jhu.edu address");
                 }
                 //Passwords do not match
@@ -108,20 +106,14 @@ public class CreateAccountActivity extends AppCompatActivity {
                     newPassTV.setError("This field cannot be empty");
                     newPassConfirmTV.setError("This field cannot be empty");
                 } else {
-                    //TODO THIS
+                    //See userListListener
                     userRef.addListenerForSingleValueEvent(userListListener);
-
-                    //writeNewUser(userID, newPass, "Temporary Placeholder", dbRoot);
-
-                    //Intent intent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
-                    //startActivity(intent);
                 }
 
             }
         });
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
