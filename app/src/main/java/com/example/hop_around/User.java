@@ -1,3 +1,5 @@
+//NO LONGER IN USE, KEPT HERE JUST IN CASE
+
 package com.example.hop_around;
 
 import com.google.firebase.database.IgnoreExtraProperties;

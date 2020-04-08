@@ -62,21 +62,25 @@ public class LogInActivity extends AppCompatActivity {
                 final String email = emailTV.getText().toString().trim();
                 final String password = passwordTV.getText().toString().trim();
 
+                //userID exists because json database doesn't allow '.' in keys for some reason
 
-
+                String userID = "default";
+                if(email.length() > 8) {
+                    userID = email.substring(0, email.length() - 8);
+                }
+                //needed as a final to be accessible from onDataChange
+                final String finalUserID = userID;
 
                 //important references
                 DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference user_found = dbRoot.child("users");
                 // db read /////////////////////////////////////////////////////////////////////////
+
                 ValueEventListener userListListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChild(email)) {
-                            Object o = dataSnapshot.child(email).getValue();
-                            User user = (User) o;
-                            if (user.getPassword().equals(password)){
-                                //TODO launching isn't working
+                        if (dataSnapshot.hasChild(finalUserID)) {
+                            if (dataSnapshot.child(finalUserID).child("password").getValue().equals(password)){
                                 Intent startMap = new Intent(LogInActivity.this, MapsView.class);
                                 startActivity(startMap);
                             }
@@ -109,30 +113,12 @@ public class LogInActivity extends AppCompatActivity {
                 if (password.length() == 0) {
                     passwordTV.setError("This field cannot be empty");
                 }
-                else if (!email.equals("user@jhu.edu")) {
-                    emailTV.setError("Invalid Username or Password");
-                    passwordTV.setError("Invalid Username or Password");
-                }
-                else if (!password.equals("password")) {
-                    emailTV.setError("Invalid Username or Password");
-                    passwordTV.setError("Invalid Username or Password");
-                }
                 //logged in correctly
                 else {
-
                     //See the declaration of the ValueEventListener above
-                    //user_found.addListenerForSingleValueEvent(userListListener);
-
-                    //TODO uncomment here for testing
-                    Intent startMap = new Intent(LogInActivity.this, CollectionActivity.class);
-                    startActivity(startMap);
+                    user_found.addListenerForSingleValueEvent(userListListener);
                 }
-
             }
         });
-
     }
-
-
-
 }
