@@ -10,22 +10,26 @@ public class User {
     private String displayName;
 
     public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+        this.displayName = "default";
+        this.password = "default";
+        this.email = "default";
     }
 
-    public User(String email, String password, String displayName) {
+
+    User(String email, String password, String displayName) {
         this.displayName = displayName;
         this.email = email;
         this.password = password;
     }
 
-    public String getDisplayName(){
+    //package private
+    String getDisplayName(){
         return this.displayName;
     }
-    public String getEmail(){
+    String getEmail(){
         return this.email;
     }
-    public String getPassword(){
+    String getPassword(){
         return this.password;
     }
 

@@ -44,6 +44,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         //THIS CREATES THE ROOT REFERENCE///////////////////////////////////////////////
         DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference usersRef = dbRoot.child("users");
         ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -64,16 +65,14 @@ public class CreateAccountActivity extends AppCompatActivity {
                 final String newPass = newPassTV.getText().toString().trim();
                 String confirmPass = newPassConfirmTV.getText().toString().trim();
 
-                DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference user_found = dbRoot.child("users");
-
+                final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference userRef = dbRoot.child("users");
+/*
                 ValueEventListener userListListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (!dataSnapshot.hasChild(newEmail)) {
-                            //If all validation passes, add user info to database
-                            DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-                            writeNewUser(newEmail, newPass, "Temporary Placeholder");
+                            writeNewUser(newEmail, newPass, "Temporary Placeholder", dbRoot);
 
                             Intent myIntent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
                             startActivity(myIntent);
@@ -90,7 +89,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                     }
                 };
-
+*/
 
                 if (newEmail.length() == 0) {
                     newEmailTV.setError("This field cannot be empty");
@@ -105,8 +104,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                     newPassTV.setError("This field cannot be empty");
                     newPassConfirmTV.setError("This field cannot be empty");
                 } else {
-                    //SEE userListListener above
-                    //user_found.addListenerForSingleValueEvent(userListListener);
+                    //TODO THIS
+                    //userRef.addListenerForSingleValueEvent(userListListener);
+                    String userID = newEmail.substring(0, newEmail.length()-8);
+                    writeNewUser(userID, newPass, "Temporary Placeholder", dbRoot);
+
                     Intent intent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
                     startActivity(intent);
                 }
@@ -125,10 +127,14 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     //adds a new user to the database
-    private void writeNewUser(String email, String password, String displayName) {
-        DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-        User user = new User(email, password, displayName);
-        dbRoot.child("users").child(email).setValue(user);
+    private void writeNewUser(String email, String password, String displayName, DatabaseReference dbRoot) {
+        //CODE FROM USER-OBJECT IMPLEMENTATION - HERE JUST IN CASE
+        //User user = new User(email, password, displayName);
+        //dbRoot.child("users").child(email).setValue(user);
+
+        //NEW SCHEMA CODE
+        dbRoot.child("users").child(email).child("password").setValue(password);
+        dbRoot.child("users").child(email).child("displayName").setValue(displayName);
     }
 
 

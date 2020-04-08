@@ -64,7 +64,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
 
-                /*
+
                 //important references
                 DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference user_found = dbRoot.child("users");
@@ -76,7 +76,6 @@ public class LogInActivity extends AppCompatActivity {
                             Object o = dataSnapshot.child(email).getValue();
                             User user = (User) o;
                             if (user.getPassword().equals(password)){
-                                //TODO: Launch the map activity or whatever happens next here! This onDataChange is what's supposed to occur in the line marked below
                                 //TODO launching isn't working
                                 Intent startMap = new Intent(LogInActivity.this, MapsView.class);
                                 startActivity(startMap);
@@ -102,7 +101,7 @@ public class LogInActivity extends AppCompatActivity {
                     }
                 };
 
-                */
+
 
                 if (email.length() == 0){
                     emailTV.setError("This field cannot be empty");
