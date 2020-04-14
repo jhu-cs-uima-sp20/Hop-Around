@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class CollectionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
@@ -21,17 +21,25 @@ public class CollectionActivity extends AppCompatActivity implements NavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection);
+        setContentView(R.layout.activity_navdrawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        if (savedInstanceState == null) {
+            // Change to the Map Fragment later on
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new CollectionFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_collection);
+        }
     }
 
     @Override
@@ -47,9 +55,20 @@ public class CollectionActivity extends AppCompatActivity implements NavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.nav_map:
+            case R.id.nav_collection:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CollectionFragment()).commit();
+                break;
+            case R.id.nav_daily_page:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new DailyPageFragment()).commit();
+                break;
+            case R.id.nav_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
                 break;
         }
-        return false;
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
