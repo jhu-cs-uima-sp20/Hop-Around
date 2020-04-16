@@ -78,7 +78,6 @@ public class MapFragment extends Fragment {
         PostActivity dialog = new PostActivity();
         dialog.show(getActivity().getSupportFragmentManager(), "dialog");
 
-
     }
 
     @Override

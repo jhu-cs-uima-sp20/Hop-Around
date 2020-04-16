@@ -42,7 +42,7 @@ public class PostActivity extends DialogFragment {
         void onFinishEditDialog(String inputText);
     }*/
 
-    public void PostActivity() {
+    public PostActivity() {
 
     }
 
