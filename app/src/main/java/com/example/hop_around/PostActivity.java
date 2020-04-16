@@ -91,6 +91,7 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 String popUpTitle = popUpName.getText().toString();
+                //TODO: save the string called popUpTitle right?
                 tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(ChipGroup group, int checkedId) {
@@ -99,6 +100,7 @@ public class PostActivity extends DialogFragment {
                         if(chip != null){
                             String chipTagSelected = chip.getText().toString();
                         }
+                        //Todo: save the string called chip right?
 
                         double maxX = 39.333977;
                         double minX = 39.326170;
@@ -112,9 +114,9 @@ public class PostActivity extends DialogFragment {
                         double diffY = maxY - minY;
                         double randomValueY = minY + Math.random( ) * diffY;
 
-
                         System.out.println(df.format(randomValueX));
                         System.out.println(df.format(randomValueY));
+                        //TODO: save doubles randomValueX and randomValueY right?
 
                     }
                 });
@@ -148,7 +150,7 @@ public class PostActivity extends DialogFragment {
 
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
-
+                //TODO:This bitmap variable named bitmap should should be saved right?
                 postImg.setImageBitmap(bitmap);
 
             }
