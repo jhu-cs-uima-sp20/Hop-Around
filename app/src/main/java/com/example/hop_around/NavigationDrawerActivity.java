@@ -55,6 +55,10 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
+            case R.id.nav_map:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MapNavigation()).commit();
+                break;
             case R.id.nav_collection:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CollectionFragment()).commit();
