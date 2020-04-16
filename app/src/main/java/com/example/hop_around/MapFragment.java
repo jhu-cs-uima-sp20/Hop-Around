@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class MapFragment extends Fragment {
@@ -39,6 +41,17 @@ public class MapFragment extends Fragment {
             e.printStackTrace();
         }
 
+        FloatingActionButton fab = rootView.findViewById(R.id.add_post);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                // .setAction("Action", null).show();
+                showPostDialog();
+            }
+        });
+
+
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -58,6 +71,14 @@ public class MapFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void showPostDialog() {
+
+        PostActivity dialog = new PostActivity();
+        dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+
+
     }
 
     @Override
