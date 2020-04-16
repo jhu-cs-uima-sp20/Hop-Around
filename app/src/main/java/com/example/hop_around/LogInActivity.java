@@ -75,7 +75,7 @@ public class LogInActivity extends AppCompatActivity {
                 DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference user_found = dbRoot.child("users");
                 // db read /////////////////////////////////////////////////////////////////////////
-
+                //Pushing random thing to try and solve random version issue
                 ValueEventListener userListListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
