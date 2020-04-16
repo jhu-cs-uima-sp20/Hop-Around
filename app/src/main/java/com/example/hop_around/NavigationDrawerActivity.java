@@ -37,8 +37,8 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         if (savedInstanceState == null) {
             // Change to the Map Fragment later on
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new CollectionFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_collection);
+                    new MapFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_map);
         }
     }
 
