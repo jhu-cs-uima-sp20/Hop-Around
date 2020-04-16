@@ -57,7 +57,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         switch(item.getItemId()) {
             case R.id.nav_map:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MapNavigation()).commit();
+                        new MapFragment()).commit();
                 break;
             case R.id.nav_collection:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
