@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#00C2C2C2">
 
 
     <TextView
@@ -35,9 +36,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
         android:text="Post"
         android:textColor="@color/colorWhite"
-        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,86 +67,85 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:singleSelection="true"
-        >
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/Dog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dog"
-            app:chipEndPadding="12dp"
-            app:chipStartPadding="12dp"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:text="Dog"
             android:textColor="@color/colorWhite"
-            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+            app:chipBackgroundColor="@color/bg_chip_state_list"
+            app:chipEndPadding="12dp"
+            app:chipStartPadding="12dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/Squirrels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Squirrels"
-            app:chipEndPadding="12dp"
-            app:chipStartPadding="12dp"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:text="Squirrels"
             android:textColor="@color/colorWhite"
-            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+            app:chipBackgroundColor="@color/bg_chip_state_list"
+            app:chipEndPadding="12dp"
+            app:chipStartPadding="12dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/Bird"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bird"
-            app:chipEndPadding="12dp"
-            app:chipStartPadding="12dp"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:text="Bird"
             android:textColor="@color/colorWhite"
-            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+            app:chipBackgroundColor="@color/bg_chip_state_list"
+            app:chipEndPadding="12dp"
+            app:chipStartPadding="12dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/People"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="People"
-            app:chipEndPadding="8dp"
-            app:chipStartPadding="8dp"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:text="People"
             android:textColor="@color/colorWhite"
-            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+            app:chipBackgroundColor="@color/bg_chip_state_list"
+            app:chipEndPadding="8dp"
+            app:chipStartPadding="8dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/Random"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Random"
-            app:chipEndPadding="8dp"
-            app:chipStartPadding="8dp"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:text="Random"
             android:textColor="@color/colorWhite"
-            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+            app:chipBackgroundColor="@color/bg_chip_state_list"
+            app:chipEndPadding="8dp"
+            app:chipStartPadding="8dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/Animals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Animals"
-            app:chipEndPadding="8dp"
-            app:chipStartPadding="8dp"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
+            android:text="Animals"
             android:textColor="@color/colorWhite"
-            app:chipBackgroundColor="@color/bg_chip_state_list"/>
+            app:chipBackgroundColor="@color/bg_chip_state_list"
+            app:chipEndPadding="8dp"
+            app:chipStartPadding="8dp" />
     </com.google.android.material.chip.ChipGroup>
 
     <ImageView
