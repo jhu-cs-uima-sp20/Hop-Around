@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -74,9 +75,9 @@ public class MapFragment extends Fragment {
     }
 
     private void showPostDialog() {
-
-        PostActivity dialog = new PostActivity();
-        dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        PostActivity postFragmentDialog = PostActivity.newInstance("Some title");
+        postFragmentDialog.show(fm, "fragment_edit");
 
     }
 
