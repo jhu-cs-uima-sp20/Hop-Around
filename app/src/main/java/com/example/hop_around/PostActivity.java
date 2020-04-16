@@ -95,6 +95,7 @@ public class PostActivity extends DialogFragment {
                     @Override
                     public void onCheckedChanged(ChipGroup group, int checkedId) {
                         Chip chip = group.findViewById(checkedId);
+                        chip.toString();
                         if(chip != null){
                             String chipTagSelected = chip.getText().toString();
                         }
