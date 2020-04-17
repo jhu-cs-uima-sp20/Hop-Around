@@ -6,7 +6,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class User {
-
+    public int popCount = 0;
     private String email;
     private String password;
     private String displayName;

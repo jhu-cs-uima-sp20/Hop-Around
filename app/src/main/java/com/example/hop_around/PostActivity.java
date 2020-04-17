@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,14 +30,15 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 
-
 public class PostActivity extends DialogFragment {
     ImageView postImg;
-
+    final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
    /* public interface PopupNameDialogListener {
         void onFinishEditDialog(String inputText);
@@ -98,20 +100,35 @@ public class PostActivity extends DialogFragment {
                         CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
             }
         });
+
+        //DB-Refs////////////////////////////////////////////////////////////////////////////////////
+        final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference popupsRef = dbRoot.child("popups");
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String popUpTitle = popUpName.getText().toString();
+                final String popUpTitle = popUpName.getText().toString();
+
                 //TODO: save the string called popUpTitle right?
+                //popupsRef.child(popUpTitle).child("title").setValue(popUpTitle);
+                System.out.println("title set");
                 tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(ChipGroup group, int checkedId) {
                         Chip chip = group.findViewById(checkedId);
                         chip.toString();
+                        String chipTagSelected = "default";
                         if(chip != null){
-                            String chipTagSelected = chip.getText().toString();
+                            chipTagSelected = chip.getText().toString();
                         }
+                        System.out.println(chipTagSelected);
                         //Todo: save the string called chip right?
+                        System.out.println("Chip Set");
+                        popupsRef.child(popUpTitle).child("tag").setValue("yikes");
+
 
                         double maxX = 39.333977;
                         double minX = 39.326170;
@@ -128,10 +145,10 @@ public class PostActivity extends DialogFragment {
                         System.out.println(df.format(randomValueX));
                         System.out.println(df.format(randomValueY));
                         //TODO: save doubles randomValueX and randomValueY right?
-
+                        //popupsRef.child(popUpTitle).child("x").setValue(String.valueOf(randomValueX));
+                        //popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
                     }
                 });
-
                 //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
                 //popUpName.getText().toString()
                 dismiss();
@@ -144,6 +161,14 @@ public class PostActivity extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,11 +186,16 @@ public class PostActivity extends DialogFragment {
 
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
-                //TODO:This bitmap variable named bitmap should should be saved right?
-                postImg.setImageBitmap(bitmap);
 
+                //TODO:This bitmaps variable named bitmap should should be saved right?
+
+                final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                final DatabaseReference popupsRef = dbRoot.child("popups");
+                String bitmapString = BitMapToString(bitmap);
+                //popupsRef.child(popUpTitle).child("bitmap").setValue(bitmapString);
+
+                postImg.setImageBitmap(bitmap);
             }
         }
     }
-
 }
