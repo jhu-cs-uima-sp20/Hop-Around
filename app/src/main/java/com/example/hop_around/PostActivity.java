@@ -127,7 +127,7 @@ public class PostActivity extends DialogFragment {
                         System.out.println(chipTagSelected);
                         //Todo: save the string called chip right?
                         System.out.println("Chip Set");
-                        popupsRef.child(popUpTitle).child("tag").setValue("yikes");
+                        //popupsRef.child(popUpTitle).child("tag").setValue(chipTagSelected);
 
 
                         double maxX = 39.333977;
@@ -189,9 +189,9 @@ public class PostActivity extends DialogFragment {
 
                 //TODO:This bitmaps variable named bitmap should should be saved right?
 
-                final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-                final DatabaseReference popupsRef = dbRoot.child("popups");
-                String bitmapString = BitMapToString(bitmap);
+                //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                //final DatabaseReference popupsRef = dbRoot.child("popups");
+                //String bitmapString = BitMapToString(bitmap);
                 //popupsRef.child(popUpTitle).child("bitmap").setValue(bitmapString);
 
                 postImg.setImageBitmap(bitmap);
