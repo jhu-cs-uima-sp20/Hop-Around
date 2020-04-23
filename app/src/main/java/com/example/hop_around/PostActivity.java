@@ -43,6 +43,8 @@ import java.util.Set;
 
 public class PostActivity extends DialogFragment {
     ImageView postImg;
+    ChipGroup tags;
+
     final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
    /* public interface PopupNameDialogListener {
@@ -90,7 +92,7 @@ public class PostActivity extends DialogFragment {
         Button post = view.findViewById(R.id.btnDone);
         final EditText popUpName = view.findViewById(R.id.popUpName);
         String title = getArguments().getString("title", "Post Popup");
-        final ChipGroup tags = view.findViewById(R.id.chipGroup);
+        tags = view.findViewById(R.id.chipGroup);
         getDialog().setTitle(title);
         postImg  = view.findViewById(R.id.imageView2);
 
@@ -115,26 +117,13 @@ public class PostActivity extends DialogFragment {
         final DatabaseReference popupsRef = dbRoot.child("popups");
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        /*tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(ChipGroup group, int checkedId) {
-                Chip chip = group.findViewById(checkedId);
-                chip.toString();
-                 String chipTagSelected = "default";
-                if(chip != null){
-                    chipTagSelected = chip.getText().toString();
-                }
-                System.out.println(chipTagSelected);
-                editor.putString(chipTagSelected, "default");
-                //Todo: save the string called chip right?
-                System.out.println("Chip Set");
-                popupsRef.child(popUpTitle).child("tag").setValue(chipTagSelected);
-            }
-        });*/
+
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
+                int idChip = tags.getCheckedChipId();
+                Chip chip = (Chip) tags.findViewById(idChip);
 
                 //TODO: save the string called popUpTitle right?
                 popupsRef.child(popUpTitle).child("title").setValue(popUpTitle);
@@ -146,42 +135,8 @@ public class PostActivity extends DialogFragment {
                 String bitmapString = BitMapToString(bitmap);
                 popupsRef.child(popUpTitle).child("bitmap").setValue(bitmapString);
 
-
-                /*tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(ChipGroup group, int checkedId) {
-                        Chip chip = group.findViewById(checkedId);
-                        chip.toString();
-                        String chipTagSelected = "default";
-                        if(chip != null){
-                            chipTagSelected = chip.getText().toString();
-                        }
-                        System.out.println(chipTagSelected);
-                        //Todo: save the string called chip right?
-                        System.out.println("Chip Set");
-                        popupsRef.child(popUpTitle).child("tag").setValue(chipTagSelected);
-
-
-                        /*double maxX = 39.333977;
-                        double minX = 39.326170;
-                        double minY = -76.624140;
-                        double maxY = -76.618813;
-
-                        DecimalFormat df = new DecimalFormat(".######");
-                        double diffX = maxX - minX;
-                        double randomValueX = minX + Math.random( ) * diffX;
-
-                        double diffY = maxY - minY;
-                        double randomValueY = minY + Math.random( ) * diffY;
-
-                        System.out.println(df.format(randomValueX));
-                        System.out.println(df.format(randomValueY));
-                        //TODO: save doubles randomValueX and randomValueY right?
-                        popupsRef.child(popUpTitle).child("x").setValue(String.valueOf(randomValueX));
-                        popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
-                    }
-                });*/
-
+                System.out.println("Chip Set");
+                popupsRef.child(popUpTitle).child("tag").setValue(chip.getText().toString());
 
 
                 double maxX = 39.333977;
