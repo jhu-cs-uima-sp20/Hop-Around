@@ -2,7 +2,9 @@ package com.example.hop_around;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -36,6 +38,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
+import java.util.Map;
+import java.util.Set;
 
 public class PostActivity extends DialogFragment {
     ImageView postImg;
@@ -80,6 +84,8 @@ public class PostActivity extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         super.onViewCreated(view, savedInstanceState);
         Button post = view.findViewById(R.id.btnDone);
         final EditText popUpName = view.findViewById(R.id.popUpName);
@@ -87,6 +93,7 @@ public class PostActivity extends DialogFragment {
         final ChipGroup tags = view.findViewById(R.id.chipGroup);
         getDialog().setTitle(title);
         postImg  = view.findViewById(R.id.imageView2);
+
         postImg.setClickable(true);
         popUpName.requestFocus();
         //popUpName.setOnEditorActionListener(this);
@@ -108,7 +115,22 @@ public class PostActivity extends DialogFragment {
         final DatabaseReference popupsRef = dbRoot.child("popups");
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-
+        /*tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ChipGroup group, int checkedId) {
+                Chip chip = group.findViewById(checkedId);
+                chip.toString();
+                 String chipTagSelected = "default";
+                if(chip != null){
+                    chipTagSelected = chip.getText().toString();
+                }
+                System.out.println(chipTagSelected);
+                editor.putString(chipTagSelected, "default");
+                //Todo: save the string called chip right?
+                System.out.println("Chip Set");
+                popupsRef.child(popUpTitle).child("tag").setValue(chipTagSelected);
+            }
+        });*/
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +147,7 @@ public class PostActivity extends DialogFragment {
                 popupsRef.child(popUpTitle).child("bitmap").setValue(bitmapString);
 
 
-                tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
+                /*tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(ChipGroup group, int checkedId) {
                         Chip chip = group.findViewById(checkedId);
@@ -140,7 +162,7 @@ public class PostActivity extends DialogFragment {
                         popupsRef.child(popUpTitle).child("tag").setValue(chipTagSelected);
 
 
-                        double maxX = 39.333977;
+                        /*double maxX = 39.333977;
                         double minX = 39.326170;
                         double minY = -76.624140;
                         double maxY = -76.618813;
@@ -158,7 +180,27 @@ public class PostActivity extends DialogFragment {
                         popupsRef.child(popUpTitle).child("x").setValue(String.valueOf(randomValueX));
                         popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
                     }
-                });
+                });*/
+
+
+
+                double maxX = 39.333977;
+                double minX = 39.326170;
+                double minY = -76.624140;
+                double maxY = -76.618813;
+
+                DecimalFormat df = new DecimalFormat(".######");
+                double diffX = maxX - minX;
+                double randomValueX = minX + Math.random( ) * diffX;
+
+                double diffY = maxY - minY;
+                double randomValueY = minY + Math.random( ) * diffY;
+
+                System.out.println(df.format(randomValueX));
+                System.out.println(df.format(randomValueY));
+                //TODO: save doubles randomValueX and randomValueY right?
+                popupsRef.child(popUpTitle).child("x").setValue(String.valueOf(randomValueX));
+                popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
                 //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
                 //popUpName.getText().toString()
                 dismiss();
