@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -98,6 +99,7 @@ public class PostActivity extends DialogFragment {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,
                         CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+
             }
         });
 
@@ -113,8 +115,16 @@ public class PostActivity extends DialogFragment {
                 final String popUpTitle = popUpName.getText().toString();
 
                 //TODO: save the string called popUpTitle right?
-                //popupsRef.child(popUpTitle).child("title").setValue(popUpTitle);
+                popupsRef.child(popUpTitle).child("title").setValue(popUpTitle);
                 System.out.println("title set");
+
+                Bitmap bitmap = ((BitmapDrawable)postImg.getDrawable()).getBitmap();
+                //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                //final DatabaseReference popupsRef = dbRoot.child("popups");
+                String bitmapString = BitMapToString(bitmap);
+                popupsRef.child(popUpTitle).child("bitmap").setValue(bitmapString);
+
+
                 tags.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(ChipGroup group, int checkedId) {
@@ -127,7 +137,7 @@ public class PostActivity extends DialogFragment {
                         System.out.println(chipTagSelected);
                         //Todo: save the string called chip right?
                         System.out.println("Chip Set");
-                        //popupsRef.child(popUpTitle).child("tag").setValue(chipTagSelected);
+                        popupsRef.child(popUpTitle).child("tag").setValue(chipTagSelected);
 
 
                         double maxX = 39.333977;
@@ -145,8 +155,8 @@ public class PostActivity extends DialogFragment {
                         System.out.println(df.format(randomValueX));
                         System.out.println(df.format(randomValueY));
                         //TODO: save doubles randomValueX and randomValueY right?
-                        //popupsRef.child(popUpTitle).child("x").setValue(String.valueOf(randomValueX));
-                        //popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
+                        popupsRef.child(popUpTitle).child("x").setValue(String.valueOf(randomValueX));
+                        popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
                     }
                 });
                 //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
