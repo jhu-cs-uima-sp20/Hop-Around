@@ -34,3 +34,26 @@ Discussion:
 1. Fix login page to work on multiple sized devices.
 2. Added pseudo-login for testing purposes.
 3. Created presentation for video.
+
+
+April 22, 2020 @3PM
+
+Mini meeting/Discussion:
+
+1. Functionality of Firebase with Map Activity and Post Activity
+2. Prep for tomorrow's meeting
+
+April 23, 2020 @3PM
+
+Team Meeting during regular class time.
+Attended class and Professor Selinski put us in a breakout room.
+
+1. Discovered bug with order of tagListener and post button listener (needed to reorder)
+2. Need to implement more error handling with Post Activity
+3. Plan to meet again tomorrow evening to work collaboritively
+4. Begun planning for presentation that needs to be recorded (Val will do Demo)
+5. Finalized Questions we had about Nav drawer functionality
+6. Divided up remaining work
+7. Meeting again on Saturday!
+ 
+
