@@ -104,6 +104,7 @@ public class MapFragment extends Fragment {
 
                 DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference popupsRef = dbRoot.child("popups");
+                popupsRef.addListenerForSingleValueEvent(popupsListListener);
             }
         });
 
