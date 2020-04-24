@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -43,8 +44,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class PostActivity extends DialogFragment {
-    //static ArrayList<String> popUpTitles = new ArrayList<>();
-    static SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+    ArrayList<String> popUpTitles = new ArrayList<>();
+    String[] arr;
     ImageView postImg;
     ChipGroup tags;
 
@@ -90,7 +91,7 @@ public class PostActivity extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        SharedPreferences.Editor editor = sharedPref.edit();
+        //SharedPreferences.Editor editor = sharedPref.edit();
         super.onViewCreated(view, savedInstanceState);
         Button post = view.findViewById(R.id.btnDone);
         final EditText popUpName = view.findViewById(R.id.popUpName);
@@ -125,6 +126,9 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
+                //popUpTitles.add(popUpTitle);
+                //
+                //saveArray(popUpTitles, "arrlist", getContext());
 
                 int idChip = tags.getCheckedChipId();
                 Chip chip = (Chip) tags.findViewById(idChip);
@@ -209,4 +213,23 @@ public class PostActivity extends DialogFragment {
             }
         }
     }
+
+    public boolean saveArray(String[] array, String arrayName, Context mContext) {
+        SharedPreferences prefs = mContext.getSharedPreferences("preferencename", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(arrayName +"_size", array.length);
+        for(int i=0;i<array.length;i++)
+            editor.putString(arrayName + "_" + i, array[i]);
+        return editor.commit();
+    }
+
+    public String[] loadArray(String arrayName, Context mContext) {
+        SharedPreferences prefs = mContext.getSharedPreferences("preferencename", 0);
+        int size = prefs.getInt(arrayName + "_size", 0);
+        String array[] = new String[size];
+        for(int i=0;i<size;i++)
+            array[i] = prefs.getString(arrayName + "_" + i, null);
+        return array;
+    }
+
 }

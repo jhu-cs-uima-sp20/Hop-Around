@@ -81,7 +81,7 @@ public class MapFragment extends Fragment {
                 ValueEventListener popupsListListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (int i = 0; i < PostActivity.popUpTitles.size(); i++) {
+                        /*for (int i = 0; i < PostActivity.popUpTitles.size(); i++) {
                             String bitmap = (String) dataSnapshot.child(PostActivity.popUpTitles.get(i)).child("bitmap").getValue();
                             String tag = (String) dataSnapshot.child(PostActivity.popUpTitles.get(i)).child("tag").getValue();
                             String x = (String) dataSnapshot.child(PostActivity.popUpTitles.get(i)).child("x").getValue();
@@ -93,6 +93,8 @@ public class MapFragment extends Fragment {
                             LatLng position = new LatLng(latitude, longitude);
                             googleMap.addMarker(new MarkerOptions().position(position).snippet(PostActivity.popUpTitles.get(i)).icon(BitmapDescriptorFactory.fromBitmap(popUpView)));
                         }
+
+                         */
                     }
 
                     @Override
