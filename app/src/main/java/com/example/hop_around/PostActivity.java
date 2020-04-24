@@ -36,16 +36,19 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
 public class PostActivity extends DialogFragment {
-    ArrayList<String> popUpTitles = new ArrayList<>();
-    String[] arr;
+    ArrayList<String> arrList = new ArrayList<>();
     ImageView postImg;
     ChipGroup tags;
 
@@ -126,9 +129,9 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
-                //popUpTitles.add(popUpTitle);
-                //
-                //saveArray(popUpTitles, "arrlist", getContext());
+                arrList = getArrayList("sweg");
+                arrList.add(popUpTitle);
+                saveArrayList(arrList, "sweg");
 
                 int idChip = tags.getCheckedChipId();
                 Chip chip = (Chip) tags.findViewById(idChip);
@@ -213,23 +216,21 @@ public class PostActivity extends DialogFragment {
             }
         }
     }
-
-    public boolean saveArray(String[] array, String arrayName, Context mContext) {
-        SharedPreferences prefs = mContext.getSharedPreferences("preferencename", 0);
+    public void saveArrayList(ArrayList<String> list, String key){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(arrayName +"_size", array.length);
-        for(int i=0;i<array.length;i++)
-            editor.putString(arrayName + "_" + i, array[i]);
-        return editor.commit();
-    }
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        editor.putString(key, json);
+        editor.apply();
 
-    public String[] loadArray(String arrayName, Context mContext) {
-        SharedPreferences prefs = mContext.getSharedPreferences("preferencename", 0);
-        int size = prefs.getInt(arrayName + "_size", 0);
-        String array[] = new String[size];
-        for(int i=0;i<size;i++)
-            array[i] = prefs.getString(arrayName + "_" + i, null);
-        return array;
+    }
+    public ArrayList<String> getArrayList(String key){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        return gson.fromJson(json, type);
     }
 
 }
