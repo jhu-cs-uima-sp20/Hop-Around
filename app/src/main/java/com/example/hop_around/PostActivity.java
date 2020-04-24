@@ -43,7 +43,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class PostActivity extends DialogFragment {
-    static ArrayList<String> popUpTitles = new ArrayList<>();
+    //static ArrayList<String> popUpTitles = new ArrayList<>();
+    static SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
     ImageView postImg;
     ChipGroup tags;
 
@@ -88,7 +89,7 @@ public class PostActivity extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+
         SharedPreferences.Editor editor = sharedPref.edit();
         super.onViewCreated(view, savedInstanceState);
         Button post = view.findViewById(R.id.btnDone);
@@ -124,7 +125,7 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
-                popUpTitles.add(popUpTitle);
+
                 int idChip = tags.getCheckedChipId();
                 Chip chip = (Chip) tags.findViewById(idChip);
 

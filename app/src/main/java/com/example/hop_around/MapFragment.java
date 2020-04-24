@@ -19,12 +19,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -87,8 +90,8 @@ public class MapFragment extends Fragment {
                             Bitmap popUpView = StringToBitMap(bitmap);
                             Double latitude = Double.parseDouble(x);
                             Double longitude = Double.parseDouble(y);
-
-
+                            LatLng position = new LatLng(latitude, longitude);
+                            googleMap.addMarker(new MarkerOptions().position(position).snippet(PostActivity.popUpTitles.get(i)).icon(BitmapDescriptorFactory.fromBitmap(popUpView)));
                         }
                     }
 
@@ -98,6 +101,10 @@ public class MapFragment extends Fragment {
                     }
 
                 };
+
+                DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference popupsRef = dbRoot.child("popups");
+                popupsRef.addListenerForSingleValueEvent(popupsListListener);
             }
         });
 
