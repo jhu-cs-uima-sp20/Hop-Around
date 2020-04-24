@@ -21,6 +21,45 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+/**
+MapView rough example
+________________________________________________________________________________________________________________________________________________________________________________
+//Lisenter - Most of code should go in here, data is only accessible inside onDataChange////////////////////////////////////////////////////////////////////////////////////////
+
+        ValueEventListener popupsListListener = new ValueEventListener() {
+@Override
+public void onDataChange(DataSnapshot dataSnapshot) {
+        for i in [from sharedprefs somelist.legnth for example] {
+        String bitmap = dataSnapshot.child("list[i]").child("bitmap").getValue();      //change "bitmap" to "x", "y", "title", or "tag" accordingly
+        String tag = ...
+        String x = ...
+        String y = ...
+
+        //Then do something with this popup info
+        }
+
+        //Anything else that needs to be done once outside of the loop
+
+        }
+@Override
+public void onCancelled(DatabaseError databaseError) {
+final String TAG = "MapView";
+        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+        }
+        };
+
+
+        _____________________________________________________________________________________________________________________________________________________________________________
+//References - to put anywhere where needed, okay to redeclare///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference popupsRef = dbRoot.child("popups");
+
+        _____________________________________________________________________________________________________________________________________________________________________________
+//Perform onDataChange - essentially calls onDataChange exactly once//////////////////////////////////////////////////////////////////////////////////////////////////////////
+        popupsRef.addListenerForSingleValueEvent(popupsListListener);
+
+*/
+
 public class MapsView extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     @Override
