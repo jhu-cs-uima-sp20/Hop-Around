@@ -39,7 +39,7 @@ import java.util.ArrayList;
 
 
 public class MapFragment extends Fragment {
-
+    boolean flag = false;
     MapView mMapView;
     private GoogleMap googleMap;
 
@@ -85,10 +85,29 @@ public class MapFragment extends Fragment {
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
+                String bitmap = "iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAT6ElEQVR42tVZCXhU1dn+zr2z7zOZ7AnZCFlZkxBW2SJL2E0ElLJIlapVbBVU9C/8WPmtFKRaRaFQC5RFURAw7IQAAcKWfYHs22QmM5PZ95l7T89Q9dEWClp9fP7vec6TmXNPzn3f73zrGQT/D+TRjacom8MtZQJ+95k3C33ffoZ+bnD3k2e3loxvNrje9fr8mYzd+lnp5sXzf1YCnc3lfJZlBJgNIDJsielj2XutfWXXxcmnq3WHekw2kd/jx7lKz6ZjH/xm1c9KoL3xxkyvx/6Zw2JEIerQLr5I9FcyvScyfnj7t9f97t2dKVcM1JUrbS6ln8ODaJvFPWVkYuJHL8/W/awEmmrO036/p9Zu7EyVyhRYKJEhRIOLJ1AsikrIPfj1upVr3j5gPfdxgY4RAx0/rEMxvKBCxOW+uOXXk75D9GfxgdqrRRt8rr5VfD4P03we4gkk2Odxu/li9fCE1NF1x04Xj7V2Np04u/MDYVK0utydkV9QIx/ythqobX95fmLxT05g99HjaYjD5f5iWl71t+dP/umNx4Uhik+FMf3SzIb2Ci6PT0fHxQDLYsAs4xcqov9udHBew7TgRl1Le7TfbinCurZHl7/8unvSO2dvieyunUfXznzrJyWw85PPkEajOdKvf/LqX8zKr/16/uK7r2T3aXrenLNh99TP9+ygLFZnW1t1Rey8hZMruQLJ55gnP2pxo0Y3Kzhmd7rG95qslSIeZ8qiufmGVR9f4H9a3avLkHK2Hntj7qs/KYG9nx6Y0mt1fCKXiOOWPTbPGpwr2/wcx6btKuGq4oomvPreWzv/+vGosmtXL+Tm5Pw2RAJbZs7/JVN05nTQlN6va+58hiMPNaj4aOTj+RNav973VxtPvIh5nNPbVuTV/GQEtm7/q8hmMZcrQsPYp5YsSv96vuKDF57VVF55Tz54anKTi9vZ5QiUqMMi+miaKnj6mV8xwTX7i8680KY1";
+                String x = "5.0";
+                String y = "5.0";
+                String tag = "random";
+                String title = "dummy";
+                final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                final DatabaseReference popupsRef = dbRoot.child("popups");
+                popupsRef.child(title).child("x").setValue(x);
+                popupsRef.child(title).child("y").setValue(y);
+                popupsRef.child(title).child("title").setValue(title);
+                popupsRef.child(title).child("tag").setValue(tag);
+                popupsRef.child(title).child("bitmap").setValue(bitmap);
                 ValueEventListener popupsListListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        ArrayList<String> arrList = getArrayList("sweg");
+                        ArrayList<String> arrList;
+                        if(flag) {
+                            arrList = getArrayList("sweg");
+                        }
+                        else{
+                            arrList = new ArrayList<>();
+                            arrList.add("dummy");
+                        }
                         for (int i = 0; i < arrList.size(); i++) {
                             String bitmap = (String) dataSnapshot.child(arrList.get(i)).child("bitmap").getValue();
                             String tag = (String) dataSnapshot.child(arrList.get(i)).child("tag").getValue();
@@ -112,8 +131,6 @@ public class MapFragment extends Fragment {
 
                 };
 
-                DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference popupsRef = dbRoot.child("popups");
                 popupsRef.addListenerForSingleValueEvent(popupsListListener);
             }
         });
@@ -154,7 +171,7 @@ public class MapFragment extends Fragment {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         PostActivity postFragmentDialog = PostActivity.newInstance("Some title");
         postFragmentDialog.show(fm, "fragment_edit");
-
+        flag = true;
     }
 
     @Override
