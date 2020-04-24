@@ -1,6 +1,9 @@
 package com.example.hop_around;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MapFragment extends Fragment {
@@ -68,10 +74,45 @@ public class MapFragment extends Fragment {
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            }
-        });
 
+                ValueEventListener popupsListListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (int i = 0; i < PostActivity.popUpTitles.size(); i++) {
+                            String bitmap = (String) dataSnapshot.child(PostActivity.popUpTitles.get(i)).child("bitmap").getValue();
+                            String tag = (String) dataSnapshot.child(PostActivity.popUpTitles.get(i)).child("tag").getValue();
+                            String x = (String) dataSnapshot.child(PostActivity.popUpTitles.get(i)).child("x").getValue();
+                            String y = (String) dataSnapshot.child(PostActivity.popUpTitles.get(i)).child("y").getValue();
+
+                            Bitmap popUpView = StringToBitMap(bitmap);
+                            Double latitude = Double.parseDouble(x);
+                            Double longitude = Double.parseDouble(y);
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+
+                });
+            }
+        }
         return rootView;
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 
     private void showPostDialog() {

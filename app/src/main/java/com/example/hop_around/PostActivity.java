@@ -38,10 +38,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
 public class PostActivity extends DialogFragment {
+    static ArrayList<String> popUpTitles = new ArrayList<>();
     ImageView postImg;
     ChipGroup tags;
 
@@ -122,6 +124,7 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
+                popUpTitles.add(popUpTitle);
                 int idChip = tags.getCheckedChipId();
                 Chip chip = (Chip) tags.findViewById(idChip);
 
