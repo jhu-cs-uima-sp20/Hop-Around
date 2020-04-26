@@ -130,9 +130,9 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
-                arrList = getArrayList("sweg");
+                arrList = getArrayList("sw3g");
                 arrList.add(popUpTitle);
-                saveArrayList(arrList, "sweg");
+                saveArrayList(arrList, "sw3g");
 
                 int idChip = tags.getCheckedChipId();
                 Chip chip = (Chip) tags.findViewById(idChip);
