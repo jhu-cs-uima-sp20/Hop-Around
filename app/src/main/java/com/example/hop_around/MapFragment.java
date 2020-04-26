@@ -112,12 +112,12 @@ public class MapFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ArrayList<String> arrList;
                                 if(flag) {
-                                    arrList = getArrayList("sweg");
+                                    arrList = getArrayList("sw3g");
                                 }
                                 else{
                                     arrList = new ArrayList<>();
                                     arrList.add("dummy");
-                                    saveArrayList(arrList, "sweg");
+                                    saveArrayList(arrList, "sw3g");
                                 }
                                 for (int i = 0; i < arrList.size(); i++) {
                                     String bitmap = (String) dataSnapshot.child(arrList.get(i)).child("bitmap").getValue();
