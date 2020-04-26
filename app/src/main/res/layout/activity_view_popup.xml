@@ -1,16 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/popup_image2"
+        android:layout_width="371dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location"
+        app:srcCompat="@color/colorAccent" />
 
     <TextView
+        android:id="@+id/location"
+        android:layout_width="75dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Location:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/posted_by" />
+
+    <TextView
+        android:id="@+id/popup_name"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Popup Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/popup_image"
+        android:layout_width="371dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popup_name"
+        app:srcCompat="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/popup_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        android:id="@+id/popup_name"
-        android:textSize="30sp"
-        android:layout_centerInParent="true">
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Tag "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </TextView>
+    <TextView
+        android:id="@+id/posted_by"
+        android:layout_width="75dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="16dp"
+        android:text="Posted By:"
+        app:layout_constraintEnd_toStartOf="@+id/posted-user"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popup_image" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/posted-user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Posted User"
+        app:layout_constraintEnd_toStartOf="@+id/active"
+        app:layout_constraintStart_toEndOf="@+id/posted_by"
+        app:layout_constraintTop_toBottomOf="@+id/popup_image" />
+
+    <TextView
+        android:id="@+id/active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popup_image" />
+</androidx.constraintlayout.widget.ConstraintLayout>
