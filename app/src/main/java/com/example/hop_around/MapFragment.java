@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Base64;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -58,7 +60,8 @@ public class MapFragment extends Fragment {
     static ArrayList<String> arrayList;
     SharedPreferences sharedpreferences;
     SharedPreferences.Editor editor;
-
+    final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+    final DatabaseReference popupsRef = dbRoot.child("popups");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,11 +89,12 @@ public class MapFragment extends Fragment {
 
         Set<String> set = sharedpreferences.getStringSet("key", null);
 
+        /*
         if(set == null) {
             set.add("dummy");
             editor.putStringSet("key", set);
             editor.commit();
-        }
+        }*/
 
         FloatingActionButton fab = rootView.findViewById(R.id.add_post);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +127,7 @@ public class MapFragment extends Fragment {
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
-
+                        /*
                         String bitmap = "iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAT6ElEQVR42tVZCXhU1dn+zr2z7zOZ7AnZCFlZkxBW2SJL2E0ElLJIlapVbBVU9C/8WPmtFKRaRaFQC5RFURAw7IQAAcKWfYHs22QmM5PZ95l7T89Q9dEWClp9fP7vec6TmXNPzn3f73zrGQT/D+TRjacom8MtZQJ+95k3C33ffoZ+bnD3k2e3loxvNrje9fr8mYzd+lnp5sXzf1YCnc3lfJZlBJgNIDJsielj2XutfWXXxcmnq3WHekw2kd/jx7lKz6ZjH/xm1c9KoL3xxkyvx/6Zw2JEIerQLr5I9FcyvScyfnj7t9f97t2dKVcM1JUrbS6ln8ODaJvFPWVkYuJHL8/W/awEmmrO036/p9Zu7EyVyhRYKJEhRIOLJ1AsikrIPfj1upVr3j5gPfdxgY4RAx0/rEMxvKBCxOW+uOXXk75D9GfxgdqrRRt8rr5VfD4P03we4gkk2Odxu/li9fCE1NF1x04Xj7V2Np04u/MDYVK0utydkV9QIx/ythqobX95fmLxT05g99HjaYjD5f5iWl71t+dP/umNx4Uhik+FMf3SzIb2Ci6PT0fHxQDLYsAs4xcqov9udHBew7TgRl1Le7TfbinCurZHl7/8unvSO2dvieyunUfXznzrJyWw85PPkEajOdKvf/LqX8zKr/16/uK7r2T3aXrenLNh99TP9+ygLFZnW1t1Rey8hZMruQLJ55gnP2pxo0Y3Kzhmd7rG95qslSIeZ8qiufmGVR9f4H9a3avLkHK2Hntj7qs/KYG9nx6Y0mt1fCKXiOOWPTbPGpwr2/wcx6btKuGq4oomvPreWzv/+vGosmtXL+Tm5Pw2RAJbZs7/JVN05nTQlN6va+58hiMPNaj4aOTj+RNav973VxtPvIh5nNPbVuTV/GQEtm7/q8hmMZcrQsPYp5YsSv96vuKDF57VVF55Tz54anKTi9vZ5QiUqMMi+miaKnj6mV8xwTX7i8680KY1";
                         String x = "5.0";
                         String y = "5.0";
@@ -136,24 +140,26 @@ public class MapFragment extends Fragment {
                         popupsRef.child(title).child("title").setValue(title);
                         popupsRef.child(title).child("tag").setValue(tag);
                         popupsRef.child(title).child("bitmap").setValue(bitmap);
+                         */
                         ValueEventListener popupsListListener = new ValueEventListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Set<String> set = sharedpreferences.getStringSet("key", null);
-                                if(set == null) {
+                                //Set<String> set = sharedpreferences.getStringSet("key", null);
+                                /*if(set == null) {
                                     set = new HashSet<String>();
                                     set.add("dummy");
                                     editor.putStringSet("key", set);
                                     editor.commit();
 
-                                }
+                                }*/
+                                int b =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
 
-                                for (Iterator<String> it = set.iterator(); it.hasNext(); ) {
-                                    String element = it.next();
-                                    String bitmap = (String) dataSnapshot.child(element).child("bitmap").getValue();
-                                    String tag = (String) dataSnapshot.child(element).child("tag").getValue();
-                                    String x = (String) dataSnapshot.child(element).child("x").getValue();
-                                    String y = (String) dataSnapshot.child(element).child("y").getValue();
+                                for (int i = 0; i <= b; i++) {
+                                    String bitmap = (String) dataSnapshot.child("popups").child(""+i).child("bitmap").getValue();
+                                    String tag = (String) dataSnapshot.child("popups").child(""+i).child("tag").getValue();
+                                    String x = (String) dataSnapshot.child("popups").child(""+i).child("x").getValue();
+                                    String y = (String) dataSnapshot.child("popups").child(""+i).child("y").getValue();
 
                                     Bitmap popUpView = StringToBitMap(bitmap);
                                     Double latitude = Double.parseDouble(x);
@@ -172,7 +178,7 @@ public class MapFragment extends Fragment {
 
                         };
 
-                        popupsRef.addListenerForSingleValueEvent(popupsListListener);
+                        dbRoot.addListenerForSingleValueEvent(popupsListListener);
                     }
                 });
 
