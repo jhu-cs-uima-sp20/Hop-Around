@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -32,6 +34,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.database.DatabaseReference;
@@ -93,8 +97,8 @@ public class PostActivity extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        //SharedPreferences.Editor editor = sharedPref.edit();
+        final SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(MapFragment.MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
         super.onViewCreated(view, savedInstanceState);
         Button post = view.findViewById(R.id.btnDone);
         final EditText popUpName = view.findViewById(R.id.popUpName);
@@ -130,9 +134,17 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
-                arrList = getArrayList("sweg");
+
+                Set<String> set = sharedpreferences.getStringSet("key", null);
+                set.add(popUpTitle);
+                editor.putStringSet("key", set);
+                editor.commit();
+
+                /*
+                arrList = getArrayList("sw3g");
                 arrList.add(popUpTitle);
-                saveArrayList(arrList, "sweg");
+                saveArrayList(arrList, "sw3g");
+                 */
 
                 int idChip = tags.getCheckedChipId();
                 Chip chip = (Chip) tags.findViewById(idChip);
@@ -142,6 +154,7 @@ public class PostActivity extends DialogFragment {
                 System.out.println("title set");
 
                 Bitmap bitmap = ((BitmapDrawable)postImg.getDrawable()).getBitmap();
+
                 //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                 //final DatabaseReference popupsRef = dbRoot.child("popups");
                 String bitmapString = BitMapToString(bitmap);
@@ -233,5 +246,8 @@ public class PostActivity extends DialogFragment {
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         return gson.fromJson(json, type);
     }
+
+
+
 
 }
