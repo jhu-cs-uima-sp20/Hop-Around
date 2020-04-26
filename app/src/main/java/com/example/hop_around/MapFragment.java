@@ -1,5 +1,6 @@
 package com.example.hop_around;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,12 +37,16 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class MapFragment extends Fragment {
+    public static final String MyPREFERENCES = "MyPrefs" ;
     static boolean test;
     MapView mMapView;
     private GoogleMap googleMap;
+    static ArrayList<String> arrayList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,8 @@ public class MapFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
@@ -62,6 +69,21 @@ public class MapFragment extends Fragment {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        ArrayList<String> arrList;
+        if(test) {
+            arrList = getArrayList("sw3g");
+        }
+        else {
+            Set<String> set = new HashSet<String>();
+            set.add("dummy");
+            editor.putStringSet("key", set);
+            editor.commit();
+
+            arrList = new ArrayList<>();
+            arrList.add("dummy");
+            saveArrayList(arrList, "sw3g");
         }
 
         FloatingActionButton fab = rootView.findViewById(R.id.add_post);
@@ -185,7 +207,6 @@ public class MapFragment extends Fragment {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         PostActivity postFragmentDialog = PostActivity.newInstance("Some title");
         postFragmentDialog.show(fm, "fragment_edit");
-        test = true;
     }
 
     @Override

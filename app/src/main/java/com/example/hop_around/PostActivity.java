@@ -93,8 +93,8 @@ public class PostActivity extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        //SharedPreferences.Editor editor = sharedPref.edit();
+        final SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(MapFragment.MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
         super.onViewCreated(view, savedInstanceState);
         Button post = view.findViewById(R.id.btnDone);
         final EditText popUpName = view.findViewById(R.id.popUpName);
@@ -130,9 +130,17 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
+
+                Set<String> set = sharedpreferences.getStringSet("key", null);
+                set.add(popUpTitle);
+                editor.putStringSet("key", set);
+                editor.commit();
+
+                /*
                 arrList = getArrayList("sw3g");
                 arrList.add(popUpTitle);
                 saveArrayList(arrList, "sw3g");
+                 */
 
                 int idChip = tags.getCheckedChipId();
                 Chip chip = (Chip) tags.findViewById(idChip);
@@ -170,6 +178,7 @@ public class PostActivity extends DialogFragment {
                 popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
                 //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
                 //popUpName.getText().toString()
+                MapFragment.test = true;
                 dismiss();
             }
         });
