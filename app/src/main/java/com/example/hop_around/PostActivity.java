@@ -11,11 +11,13 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -38,8 +41,11 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -97,8 +103,8 @@ public class PostActivity extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(MapFragment.MyPREFERENCES, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedpreferences.edit();
+        //final SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(MapFragment.MyPREFERENCES, Context.MODE_PRIVATE);
+        //final SharedPreferences.Editor editor = sharedpreferences.edit();
         super.onViewCreated(view, savedInstanceState);
         Button post = view.findViewById(R.id.btnDone);
         final EditText popUpName = view.findViewById(R.id.popUpName);
@@ -134,11 +140,30 @@ public class PostActivity extends DialogFragment {
             @Override
             public void onClick(View view) {
                 final String popUpTitle = popUpName.getText().toString();
+                ValueEventListener countListener = new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int i =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
+                        int b = i + 1;
+                        dbRoot.child("popCount").setValue(b);
+                }
 
-                Set<String> set = sharedpreferences.getStringSet("key", null);
-                set.add(popUpTitle);
-                editor.putStringSet("key", set);
-                editor.commit();
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Getting Post failed, log a message
+                        String TAG = "postactivity";
+                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                        // ...
+                    }
+                };
+
+                dbRoot.addListenerForSingleValueEvent(countListener);
+
+                //Set<String> set = sharedpreferences.getStringSet("key", null);
+                //set.add(popUpTitle);
+                //editor.putStringSet("key", set);
+                //editor.commit();
 
                 /*
                 arrList = getArrayList("sw3g");
@@ -147,43 +172,62 @@ public class PostActivity extends DialogFragment {
                  */
 
                 int idChip = tags.getCheckedChipId();
-                Chip chip = (Chip) tags.findViewById(idChip);
+                final Chip chip = (Chip) tags.findViewById(idChip);
 
                 //TODO: save the string called popUpTitle right?
-                popupsRef.child(popUpTitle).child("title").setValue(popUpTitle);
-                System.out.println("title set");
+                ValueEventListener coolListener = new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int i =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
+                        popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
+                        popupsRef.child(Integer.toString(i)).child("id").setValue(i);
+                        popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
+                        popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
 
-                Bitmap bitmap = ((BitmapDrawable)postImg.getDrawable()).getBitmap();
+                        Bitmap bitmap = ((BitmapDrawable)postImg.getDrawable()).getBitmap();
 
-                //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-                //final DatabaseReference popupsRef = dbRoot.child("popups");
-                String bitmapString = BitMapToString(bitmap);
-                popupsRef.child(popUpTitle).child("bitmap").setValue(bitmapString);
+                        //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                        //final DatabaseReference popupsRef = dbRoot.child("popups");
+                        String bitmapString = BitMapToString(bitmap);
+                        popupsRef.child(Integer.toString(i)).child("bitmap").setValue(bitmapString);
 
-                System.out.println("Chip Set");
-                popupsRef.child(popUpTitle).child("tag").setValue(chip.getText().toString());
+                        System.out.println("Chip Set");
+                        popupsRef.child(Integer.toString(i)).child("tag").setValue(chip.getText().toString());
 
 
-                double maxX = 39.333977;
-                double minX = 39.326170;
-                double minY = -76.624140;
-                double maxY = -76.618813;
+                        double maxX = 39.333977;
+                        double minX = 39.326170;
+                        double minY = -76.624140;
+                        double maxY = -76.618813;
 
-                DecimalFormat df = new DecimalFormat(".######");
-                double diffX = maxX - minX;
-                double randomValueX = minX + Math.random( ) * diffX;
+                        DecimalFormat df = new DecimalFormat(".######");
+                        double diffX = maxX - minX;
+                        double randomValueX = minX + Math.random( ) * diffX;
 
-                double diffY = maxY - minY;
-                double randomValueY = minY + Math.random( ) * diffY;
+                        double diffY = maxY - minY;
+                        double randomValueY = minY + Math.random( ) * diffY;
 
-                System.out.println(df.format(randomValueX));
-                System.out.println(df.format(randomValueY));
-                //TODO: save doubles randomValueX and randomValueY right?
-                popupsRef.child(popUpTitle).child("x").setValue(String.valueOf(randomValueX));
-                popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
-                //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
-                //popUpName.getText().toString()
-                dismiss();
+                        System.out.println(df.format(randomValueX));
+                        System.out.println(df.format(randomValueY));
+                        //TODO: save doubles randomValueX and randomValueY right?
+                        popupsRef.child(Integer.toString(i)).child("x").setValue(String.valueOf(randomValueX));
+                        popupsRef.child(Integer.toString(i)).child("y").setValue(String.valueOf(randomValueY));
+                        //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
+                        //popUpName.getText().toString()
+                        dismiss();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Getting Post failed, log a message
+                        String TAG = "postactivity";
+                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                        // ...
+                    }
+                };
+
+                dbRoot.addListenerForSingleValueEvent(coolListener);
             }
         });
 
