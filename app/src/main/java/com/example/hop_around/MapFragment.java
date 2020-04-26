@@ -107,6 +107,7 @@ public class MapFragment extends Fragment {
                         else{
                             arrList = new ArrayList<>();
                             arrList.add("dummy");
+                            saveArrayList(arrList, "sweg");
                         }
                         for (int i = 0; i < arrList.size(); i++) {
                             String bitmap = (String) dataSnapshot.child(arrList.get(i)).child("bitmap").getValue();
