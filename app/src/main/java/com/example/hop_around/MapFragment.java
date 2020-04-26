@@ -157,7 +157,7 @@ public class MapFragment extends Fragment {
                                     Double latitude = Double.parseDouble(x);
                                     Double longitude = Double.parseDouble(y);
                                     LatLng position = new LatLng(latitude, longitude);
-                                    googleMap.addMarker(new MarkerOptions().position(position).snippet(element).icon(BitmapDescriptorFactory.fromBitmap(popUpView)));
+                                    googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(BitmapDescriptorFactory.fromBitmap(popUpView)));
                                 }
                                 /*
                                 for (int i = 0; i < set.size(); i++) {
