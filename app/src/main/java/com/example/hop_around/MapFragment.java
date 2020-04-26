@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Base64;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -140,6 +142,7 @@ public class MapFragment extends Fragment {
                         popupsRef.child(title).child("bitmap").setValue(bitmap);
                          */
                         ValueEventListener popupsListListener = new ValueEventListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 //Set<String> set = sharedpreferences.getStringSet("key", null);
@@ -150,7 +153,7 @@ public class MapFragment extends Fragment {
                                     editor.commit();
 
                                 }*/
-                                int b =  (int) dataSnapshot.child("popCount").getValue();
+                                int b =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
 
                                 for (int i = 0; i <= b; i++) {
                                     String bitmap = (String) dataSnapshot.child("popups").child(""+i).child("bitmap").getValue();
