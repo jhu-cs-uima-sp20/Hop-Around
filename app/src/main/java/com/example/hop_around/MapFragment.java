@@ -158,22 +158,6 @@ public class MapFragment extends Fragment {
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView));
                                     googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                 }
-                                /*
-                                for (int i = 0; i < set.size(); i++) {
-                                    String bitmap = (String) dataSnapshot.child(arrList.get(i)).child("bitmap").getValue();
-                                    String tag = (String) dataSnapshot.child(arrList.get(i)).child("tag").getValue();
-                                    String x = (String) dataSnapshot.child(arrList.get(i)).child("x").getValue();
-                                    String y = (String) dataSnapshot.child(arrList.get(i)).child("y").getValue();
-
-                                    Bitmap popUpView = StringToBitMap(bitmap);
-                                    Double latitude = Double.parseDouble(x);
-                                    Double longitude = Double.parseDouble(y);
-                                    LatLng position = new LatLng(latitude, longitude);
-                                    googleMap.addMarker(new MarkerOptions().position(position).snippet(arrList.get(i)).icon(BitmapDescriptorFactory.fromBitmap(popUpView)));
-                                }
-                                 */
-
-
                             }
 
                             @Override
@@ -259,7 +243,7 @@ public class MapFragment extends Fragment {
 
         final int color = Color.RED;
         final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, 100, 100);
+        final Rect rect = new Rect(0, 0, 200, 200);
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
