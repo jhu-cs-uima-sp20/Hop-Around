@@ -56,16 +56,21 @@ public class MapFragment extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
     static ArrayList<String> arrayList;
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedpreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedpreferences.edit();
+
+
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
