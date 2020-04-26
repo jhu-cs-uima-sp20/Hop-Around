@@ -39,7 +39,7 @@ import java.util.ArrayList;
 
 
 public class MapFragment extends Fragment {
-    boolean flag;
+    static boolean flag;
     MapView mMapView;
     private GoogleMap googleMap;
 
