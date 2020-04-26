@@ -53,7 +53,6 @@ import java.util.Set;
 
 public class MapFragment extends Fragment {
     public static final String MyPREFERENCES = "MyPrefs" ;
-    static boolean test;
     MapView mMapView;
     private GoogleMap googleMap;
     static ArrayList<String> arrayList;
@@ -61,7 +60,6 @@ public class MapFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         test = false;
     }
 
     @Override
@@ -81,19 +79,12 @@ public class MapFragment extends Fragment {
             e.printStackTrace();
         }
 
-        ArrayList<String> arrList;
-        if(test) {
-            arrList = getArrayList("sw3g");
-        }
-        else {
-            Set<String> set = new HashSet<String>();
+        Set<String> set = sharedpreferences.getStringSet("key", null);
+
+        if(set == null) {
             set.add("dummy");
             editor.putStringSet("key", set);
             editor.commit();
-
-            arrList = new ArrayList<>();
-            arrList.add("dummy");
-            saveArrayList(arrList, "sw3g");
         }
 
         FloatingActionButton fab = rootView.findViewById(R.id.add_post);
@@ -143,11 +134,8 @@ public class MapFragment extends Fragment {
                         ValueEventListener popupsListListener = new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Set<String> set;
-                                if(test) {
-                                     set = sharedpreferences.getStringSet("key", null);
-                                }
-                                else {
+                                Set<String> set = sharedpreferences.getStringSet("key", null);
+                                if(set == null) {
                                     set = new HashSet<String>();
                                     set.add("dummy");
                                     editor.putStringSet("key", set);
@@ -263,9 +251,10 @@ public class MapFragment extends Fragment {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
+
     private Bitmap getCircleBitmap(Bitmap bitmap) {
-        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        final Bitmap output = Bitmap.createBitmap(100,
+               100, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(output);
 
         final int color = Color.RED;

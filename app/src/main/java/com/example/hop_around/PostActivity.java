@@ -183,7 +183,6 @@ public class PostActivity extends DialogFragment {
                 popupsRef.child(popUpTitle).child("y").setValue(String.valueOf(randomValueY));
                 //TODO create pop up with image saved, random location within hopkins parameters (longitudinal latitudinal), tags associated with popup, and popup title
                 //popUpName.getText().toString()
-                MapFragment.test = true;
                 dismiss();
             }
         });
