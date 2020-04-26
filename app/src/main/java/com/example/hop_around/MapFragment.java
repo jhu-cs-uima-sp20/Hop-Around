@@ -39,9 +39,15 @@ import java.util.ArrayList;
 
 
 public class MapFragment extends Fragment {
-    boolean flag = false;
+
     MapView mMapView;
     private GoogleMap googleMap;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        boolean flag = false;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
