@@ -39,14 +39,14 @@ import java.util.ArrayList;
 
 
 public class MapFragment extends Fragment {
-
+    boolean flag;
     MapView mMapView;
     private GoogleMap googleMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean flag = false;
+         flag = false;
     }
 
     @Override
