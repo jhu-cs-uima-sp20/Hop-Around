@@ -39,14 +39,14 @@ import java.util.ArrayList;
 
 
 public class MapFragment extends Fragment {
-    static boolean flag;
+    static boolean test;
     MapView mMapView;
     private GoogleMap googleMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         flag = false;
+         test = false;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class MapFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ArrayList<String> arrList;
-                                if(flag) {
+                                if(test) {
                                     arrList = getArrayList("sw3g");
                                 }
                                 else{
@@ -185,7 +185,7 @@ public class MapFragment extends Fragment {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         PostActivity postFragmentDialog = PostActivity.newInstance("Some title");
         postFragmentDialog.show(fm, "fragment_edit");
-        flag = true;
+        test = true;
     }
 
     @Override
