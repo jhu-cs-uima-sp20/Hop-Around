@@ -45,9 +45,9 @@ public class CollectionFragment extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_collection, container, false);
         mPopupList = new ArrayList<>();
-        mPopupList.add(new PopupItem(R.drawable.ic_person, "Name 1", 0));
-        mPopupList.add(new PopupItem(R.drawable.ic_launcher_background, "Name 2", 1));
-        mPopupList.add(new PopupItem(R.drawable.ic_map, "Name 3", 2));
+        //mPopupList.add(new PopupItem(R.drawable.ic_person, "Name 1", 0));
+        //mPopupList.add(new PopupItem(R.drawable.ic_launcher_background, "Name 2", 1));
+        //mPopupList.add(new PopupItem(R.drawable.ic_map, "Name 3", 2));
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
@@ -62,7 +62,7 @@ public class CollectionFragment extends Fragment {
                     if (dataSnapshot.child(UID).hasChild(""+ i)){
                         String title = (String) dataSnapshot.child("popups").child("" + i).child("title").getValue();
                         String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
-                        //mPopupList.add(new PopupItem(StringToBitMap(bitmap),  title, i));
+                        mPopupList.add(new PopupItem(StringToBitMap(bitmap),  title, i));
                     }
                 }
             }
