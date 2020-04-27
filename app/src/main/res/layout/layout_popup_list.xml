@@ -24,9 +24,12 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="30dp"
             android:layout_toEndOf="@+id/popup_image"
+            android:fontFamily="monospace"
             android:text="Popup Name"
+            android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="17sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
