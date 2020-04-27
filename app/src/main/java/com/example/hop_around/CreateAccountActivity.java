@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -76,6 +77,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (!dataSnapshot.hasChild(userID)) {
                             writeNewUser(userID, newPass, "Temporary Placeholder", dbRoot);
+                            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                            myEdit.putString("UID", userID);
+                            myEdit.commit();
                             //HAHAHAHAHAHAHA IT WORKS JESUS CHRIST. YESSSSSS YYESSSSSSSSSSSSS HAHAhAHAHAHAEFBWFBSJKBFSKHF BHKSJFWBJ
                             Intent myIntent = new Intent(CreateAccountActivity.this, SetUpAccountActivity.class);
                             startActivity(myIntent);
