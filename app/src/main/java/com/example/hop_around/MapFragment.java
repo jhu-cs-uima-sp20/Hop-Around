@@ -213,6 +213,7 @@ public class MapFragment extends Fragment {
                 googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(final Marker marker) {
+                        LatLng markerClicked = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
                         ValueEventListener yeetListener = new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
@@ -244,9 +245,12 @@ public class MapFragment extends Fragment {
                             }
 
                         };
-
-                        dbRoot.addListenerForSingleValueEvent(yeetListener);
-                        return false;
+                        if ((person.latitude == markerClicked.latitude) && (person.longitude == markerClicked.longitude)) {
+                            return false;
+                        } else {
+                            dbRoot.addListenerForSingleValueEvent(yeetListener);
+                            return false;
+                        }
                     }
                 });
             }
