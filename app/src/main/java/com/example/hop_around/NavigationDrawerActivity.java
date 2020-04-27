@@ -51,6 +51,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
         final TextView pointCount = (TextView) headerView.findViewById(R.id.pts);
         final TextView displayName = (TextView) headerView.findViewById(R.id.disp);
+        final ImageView pic = (ImageView) headerView.findViewById(R.id.navhead);
         final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
@@ -61,8 +62,11 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                 int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
                 String pts = "Hop Pts: " + Integer.toString(q);
                 String display = "" + dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                Bitmap btm = StringToBitMap(""+dataSnapshot.child("users").child(UID).child("pfp").getValue());
+
                 pointCount.setText(pts);
                 displayName.setText(display);
+                pic.setImageBitmap(btm);
             }
 
             @Override
@@ -128,6 +132,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
             final TextView pointCount = (TextView) headerView.findViewById(R.id.pts);
             final TextView displayName = (TextView) headerView.findViewById(R.id.disp);
+            final ImageView pic = (ImageView) headerView.findViewById(R.id.navhead);
             final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
             SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
             final String UID = sharedPreferences.getString("UID", "kidPizza");
@@ -138,8 +143,11 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                     int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
                     String pts = "Hop Pts: " + Integer.toString(q);
                     String display = "" + dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                    Bitmap btm = StringToBitMap(""+dataSnapshot.child("users").child(UID).child("pfp").getValue());
+
                     pointCount.setText(pts);
                     displayName.setText(display);
+                    pic.setImageBitmap(btm);
                 }
 
                 @Override
@@ -182,6 +190,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
         final TextView pointCount = (TextView) headerView.findViewById(R.id.pts);
         final TextView displayName = (TextView) headerView.findViewById(R.id.disp);
+        final ImageView pic = (ImageView) headerView.findViewById(R.id.navhead);
         final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
@@ -192,8 +201,11 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                 int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
                 String pts = "Hop Pts: " + Integer.toString(q);
                 String display = "" + dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                Bitmap btm = StringToBitMap(""+dataSnapshot.child("users").child(UID).child("pfp").getValue());
+
                 pointCount.setText(pts);
                 displayName.setText(display);
+                pic.setImageBitmap(btm);
             }
 
             @Override
