@@ -173,18 +173,28 @@ public class MapFragment extends Fragment {
 
                 googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
-                    public boolean onMarkerClick(Marker marker) {
+                    public boolean onMarkerClick(final Marker marker) {
                         ValueEventListener yeetListener = new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 //Todo:do what you need to do with dataSnapshot in here
-                            /*int refId = (int) marker.getTag();
-                        String bitmap = (String) dataSnapshot.child("popups").child("" + refId).child("bitmap").getValue();
-                        String tag = (String) dataSnapshot.child("popups").child("" + refId).child("tag").getValue();
-                        String x = (String) dataSnapshot.child("popups").child("" + refId).child("x").getValue();
-                        String y = (String) dataSnapshot.child("popups").child("" + refId).child("y").getValue();
-                        //editor.putInt("refId", refId);
+                            int refId = (int) marker.getTag();
+
+                            String title = (String) dataSnapshot.child("popups").child("" + refId).child("title").getValue();
+                            String bitmap = (String) dataSnapshot.child("popups").child("" + refId).child("bitmap").getValue();
+                            String tag = (String) dataSnapshot.child("popups").child("" + refId).child("tag").getValue();
+                            String x = (String) dataSnapshot.child("popups").child("" + refId).child("x").getValue();
+                            String y = (String) dataSnapshot.child("popups").child("" + refId).child("y").getValue();
+                                Intent myIntent = new Intent(getActivity(), ViewPopup.class);
+                                myIntent.putExtra("refId", refId);
+                                myIntent.putExtra("title", title);
+                                myIntent.putExtra("bitmap", bitmap);
+                                myIntent.putExtra("tag", tag);
+                                myIntent.putExtra("x", x);
+                                myIntent.putExtra("y", y);
+                                getActivity().startActivity(myIntent);
+                                //editor.putInt("refId", refId);
                         //startActivity(new Intent(getActivity(), ViewPopup.class));*/
                             }
 
