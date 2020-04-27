@@ -46,8 +46,11 @@ public class ViewPopup extends AppCompatActivity {
         final int i = intent.getIntExtra("refId", 0);
         final Button collect = findViewById(R.id.collect_button);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.view_popup_toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         ValueEventListener popupListener = new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -136,9 +139,16 @@ public class ViewPopup extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        finish();
+        onBackPressed();
         return true;
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
     public Bitmap StringToBitMap(String encodedString){
         try{
