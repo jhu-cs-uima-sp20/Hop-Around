@@ -181,10 +181,10 @@ public class MapFragment extends Fragment {
 
 
                                     if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
-                                        c = Color.GREEN;
+                                        c = Color.GRAY;
                                     }
                                     else {
-                                        c = Color.GRAY;
+                                        c = Color.GREEN;
                                     }
 
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView, c));
@@ -335,8 +335,9 @@ public class MapFragment extends Fragment {
         canvas.drawOval(rectS, paintStroke);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
         canvas.drawBitmap(bitmap, rectStroke, rectStroke, paintStroke);
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
 
         bitmap.recycle();
 
