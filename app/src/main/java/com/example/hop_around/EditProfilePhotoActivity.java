@@ -1,5 +1,6 @@
 package com.example.hop_around;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +12,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +25,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
@@ -31,7 +37,7 @@ import java.io.IOException;
 
 public class EditProfilePhotoActivity extends AppCompatActivity {
 
-    private static final int RESULT_LOAD_IMAGE=1;
+    private static final int RESULT_LOAD_IMAGE = 1;
     protected ImageView toUpload;
 
     @Override
@@ -43,13 +49,36 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         actionBar.setTitle("Profile Photo");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        final String UID = sharedPreferences.getString("UID", "kidPizza");
+        ValueEventListener Listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!"default".equals(""+dataSnapshot.child("users").child(UID).child("pfp").getValue())){
+                   ImageView pic = findViewById(R.id.image_to_upload);
+                   Bitmap btm = StringToBitMap(""+dataSnapshot.child("users").child(UID).child("pfp").getValue());
+                   pic.setImageBitmap(btm);
+                }
+                else{
+                    //nothing
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        dbRoot.addListenerForSingleValueEvent(Listener);
+
+
         Button continu = (Button) findViewById(R.id.continue_btn);
         continu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 //startActivityForResult(intent,
-                 //       RESULT_LOAD_IMAGE);
+                //       RESULT_LOAD_IMAGE);
                 //TODO need to access this ImageView's data when continue is pressed and we return to SetUpAccount activity, right now nothing is being saved/stored
                 finish();
             }
@@ -67,7 +96,7 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         }*/
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
@@ -91,19 +120,17 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
 
     //back button is pressed, so don't save anything
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
         //edit button is selected
-        if(id == R.id.edit_photo) {
+        if (id == R.id.edit_photo) {
 
             Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(gallery, RESULT_LOAD_IMAGE);
 
-        }
-
-        else { //Back button was pressed
+        } else { //Back button was pressed
             finish();
         }
         return true;
@@ -129,6 +156,7 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         }
         return StringToBitMap("failed");
     }
+
     public Bitmap StringToBitMap(String encodedString) {
         try {
             byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
@@ -146,11 +174,11 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         //finish();
     }
 
-    public String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+    public String BitMapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }
 
