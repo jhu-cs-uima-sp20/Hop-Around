@@ -30,5 +30,6 @@
     <string name="hop_points_profile">Hop Points:</string>
     <string name="hop_points_number">0</string>
     <string name="collection_on_profile">\'s Recently Collected</string>
+    <string name="filler">filler filler filler filler</string>
 
 </resources>

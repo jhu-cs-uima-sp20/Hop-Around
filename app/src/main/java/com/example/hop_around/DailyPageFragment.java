@@ -3,6 +3,8 @@ package com.example.hop_around;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,6 +28,12 @@ public class DailyPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_collection, container, false);
+
+        //TODO make search bar invisible
+        //setMenuVisibility(false);
+        //MenuItem menuItem = menu.findItem(R.id.item);
+        //menuItem.setVisible(false);
+
         mPopupList = new ArrayList<>();
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);
@@ -54,5 +62,7 @@ public class DailyPageFragment extends Fragment {
         intent.putExtra("position", position);
         startActivity(intent);
     }
+
+
 
 }
