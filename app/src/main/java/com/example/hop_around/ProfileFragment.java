@@ -2,6 +2,7 @@ package com.example.hop_around;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -39,13 +40,11 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         description.setEnabled(false);
 
         final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        final String UID = sharedPreferences.getString("UID", "kidPizza");
 
         //TODO: NEED TO LOAD THE USER'S DATA: Hop points, display name, description, recently collected display!
             //read from firebase
-
-
-
 
         //TODO in these onclicks: WRITE to firebase!!!
         //on clicks for editing display name, description, profile photo
@@ -67,8 +66,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                             displayName.setEnabled(false);
                             successfulEdit(0);
                             Toast.makeText(getContext(), "New Display Name Saved!", Toast.LENGTH_LONG).show();
-                            //TODO write to Database, save data, maybe have a toast saying New Display Name Saved!
-
+                            dbRoot.child("users").child(UID).child("displayName").setValue(displayName.getText().toString());
                                     //TODO put in a METHOD
                         }
                     }

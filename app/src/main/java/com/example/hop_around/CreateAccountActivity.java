@@ -132,6 +132,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         dbRoot.child("users").child(email).child("password").setValue(password);
         dbRoot.child("users").child(email).child("displayName").setValue(displayName);
         dbRoot.child("users").child(email).child("pts").setValue(0);
+        dbRoot.child("users").child(email).child("pfp").setValue("default");
     }
 
 

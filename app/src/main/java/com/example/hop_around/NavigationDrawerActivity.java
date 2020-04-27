@@ -87,9 +87,59 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+
+            final TextView pointCount = (TextView) headerView.findViewById(R.id.pts);
+            final TextView displayName = (TextView) headerView.findViewById(R.id.disp);
+            final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+            final String UID = sharedPreferences.getString("UID", "kidPizza");
+            ValueEventListener Listener = new ValueEventListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
+                    String pts = "Hop Pts: " + Integer.toString(q);
+                    String display = "" + dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                    pointCount.setText(pts);
+                    displayName.setText(display);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            };
+            dbRoot.addListenerForSingleValueEvent(Listener);
+
         }
         else {
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+
+            final TextView pointCount = (TextView) headerView.findViewById(R.id.pts);
+            final TextView displayName = (TextView) headerView.findViewById(R.id.disp);
+            final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+            final String UID = sharedPreferences.getString("UID", "kidPizza");
+            ValueEventListener Listener = new ValueEventListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
+                    String pts = "Hop Pts: " + Integer.toString(q);
+                    String display = "" + dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                    pointCount.setText(pts);
+                    displayName.setText(display);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            };
+            dbRoot.addListenerForSingleValueEvent(Listener);
             super.onBackPressed();
+
         }
     }
 
@@ -118,6 +168,30 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                 startActivity(logOut);
                 finish();
         }
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+
+        final TextView pointCount = (TextView) headerView.findViewById(R.id.pts);
+        final TextView displayName = (TextView) headerView.findViewById(R.id.disp);
+        final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        final String UID = sharedPreferences.getString("UID", "kidPizza");
+        ValueEventListener Listener = new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
+                String pts = "Hop Pts: " + Integer.toString(q);
+                String display = "" + dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                pointCount.setText(pts);
+                displayName.setText(display);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        dbRoot.addListenerForSingleValueEvent(Listener);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
