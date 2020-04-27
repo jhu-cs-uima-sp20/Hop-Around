@@ -62,7 +62,7 @@ public class CollectionFragment extends Fragment {
                     if (dataSnapshot.child(UID).hasChild(""+ i)){
                         String title = (String) dataSnapshot.child("popups").child("" + i).child("title").getValue();
                         String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
-                        mPopupList.add(new PopupItem(StringToBitMap(bitmap),  title, i));
+                        //mPopupList.add(new PopupItem(StringToBitMap(bitmap),  title, i));
                     }
                 }
             }
