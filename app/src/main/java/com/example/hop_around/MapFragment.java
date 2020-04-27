@@ -337,6 +337,7 @@ public class MapFragment extends Fragment {
         canvas.drawOval(rectF, stroke);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        stroke.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, stroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
         canvas.drawBitmap(bitmap, rect, rect, stroke);
