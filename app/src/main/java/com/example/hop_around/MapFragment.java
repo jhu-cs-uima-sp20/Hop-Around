@@ -49,6 +49,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -64,6 +65,7 @@ public class MapFragment extends Fragment {
     SharedPreferences.Editor editor;
     final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
     final DatabaseReference popupsRef = dbRoot.child("popups");
+    LatLng person;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,11 +121,27 @@ public class MapFragment extends Fragment {
                 //googleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+
+
+                double maxX = 39.333977;
+                double minX = 39.326170;
+                double minY = -76.624140;
+                double maxY = -76.618813;
+
+                DecimalFormat df = new DecimalFormat(".######");
+                double diffX = maxX - minX;
+                double randomValueX = minX + Math.random( ) * diffX;
+
+                double diffY = maxY - minY;
+                double randomValueY = minY + Math.random( ) * diffY;
+
+                person = new LatLng(randomValueX, randomValueY);
+                googleMap.addMarker(new MarkerOptions().position(person).title("User"));
+
+
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(person).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
