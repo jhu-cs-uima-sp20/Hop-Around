@@ -41,9 +41,9 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         continu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,
-                        RESULT_LOAD_IMAGE);
+                //Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                //startActivityForResult(intent,
+                 //       RESULT_LOAD_IMAGE);
                 //TODO need to access this ImageView's data when continue is pressed and we return to SetUpAccount activity, right now nothing is being saved/stored
                 finish();
             }
@@ -76,7 +76,7 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
 
             ImageView profile = findViewById(R.id.image_to_upload);
             profile.setImageBitmap(bmp);
-
+            //finish();
             //to know about the selected image width and height
             //Toast.makeText(MainActivity.this, image_view.getDrawable().getIntrinsicWidth()+" & "+image_view.getDrawable().getIntrinsicHeight(), Toast.LENGTH_SHORT).show();
         }
@@ -133,6 +133,10 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        //finish();
+    }
 
 }
