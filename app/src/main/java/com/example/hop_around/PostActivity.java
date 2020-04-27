@@ -93,7 +93,7 @@ public class PostActivity extends DialogFragment {
         // Build dialog
         Dialog builder = new Dialog(getActivity());
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        builder.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        builder.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.WHITE));
         builder.setContentView(view);
         return builder;
 }
@@ -101,7 +101,9 @@ public class PostActivity extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.post_activity_layout, container, false);
+        View view = inflater.inflate(R.layout.post_activity_layout, container, false);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.WHITE));
+        return view;
 
     }
 
