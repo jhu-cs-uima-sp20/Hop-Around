@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -140,7 +142,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
 
         //TODO: need to add SEARCH BAR/SEARCH ACTIVITY
         setHasOptionsMenu(true); //THIS MAKES SEARCH VISIBLE FOR ALL THE FRAGMENTS
-
+        //setMenuVisibility(true);
 
         return view;
     }
@@ -170,5 +172,10 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
     }
 
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        inflater.inflate(R.menu.search_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
 }
