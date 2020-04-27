@@ -24,7 +24,7 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile_photo);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Create Account");
+        actionBar.setTitle("Profile Photo");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Button continu = (Button) findViewById(R.id.continue_btn);
@@ -44,9 +44,6 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
         if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             toUpload.setImageURI(selectedImage); //TODO failing here when I pick an image from gallery on tablet, but not sure if it's because I"m using emulator
-            //NOTE: will we need to access variable toUpload to display the image on the user's profile??
-            //or can we just pull from the firebase DB at this point?
-
 
         }
     }

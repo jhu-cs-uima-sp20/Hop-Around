@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="155dp"
+        android:clickable="true"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <EditText
@@ -22,19 +23,19 @@
         android:layout_below="@+id/profile_photo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:editable="false"
-        android:text="@string/display_name"
+        android:editable="true"
         android:maxLength="15"
+        android:text="@string/display_name"
         android:textSize="18sp" />
 
 
-    <ImageButton
+    <ImageView
         android:id="@+id/edit_display_name_btn"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@+id/profile_photo"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="24dp"
         android:layout_toEndOf="@+id/profile_display_name"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_menu_edit" />
@@ -71,18 +72,18 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="19dp"
         android:background="@color/colorPrimaryDark"
-        android:editable="false"
+        android:editable="true"
         android:maxLength="150"
         android:text="@string/filler" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/edit_description_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@+id/hop_points"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="89dp"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
