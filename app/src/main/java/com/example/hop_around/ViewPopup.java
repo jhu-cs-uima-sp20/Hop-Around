@@ -62,11 +62,15 @@ public class ViewPopup extends AppCompatActivity {
                 TextView nameView = findViewById(R.id.popup_name);
                 nameView.setText(title);
 
+                Bitmap scaled = Bitmap.createScaledBitmap(popUpView, popUpView.getHeight() * 3, popUpView.getHeight() * 3, false);
+
                 TextView tagView = findViewById(R.id.popup_tag);
                 tagView.setText(tag);
 
                 ImageView popupImage = findViewById(R.id.popup_image);
-                popupImage.setImageBitmap(popUpView);
+                popupImage.setImageBitmap(scaled);
+
+
                 LatLng person = intent.getExtras().getParcelable("person");
                 double lat = person.latitude;
                 double lng = person.longitude;
