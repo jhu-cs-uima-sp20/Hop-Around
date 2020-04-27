@@ -188,10 +188,7 @@ public class MapFragment extends Fragment {
                                     }
 
                                     Bitmap original = getCircleBitmap(popUpView, c);
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap(original, 50, 50));
-
-
-
+                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(original);
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
 
@@ -339,8 +336,9 @@ public class MapFragment extends Fragment {
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         stroke.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, stroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
-
+        canvas.drawBitmap(bitmap, rect, rect, stroke);
         bitmap.recycle();
 
         return output;
