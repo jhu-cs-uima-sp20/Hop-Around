@@ -69,7 +69,13 @@ public class ViewPopup extends AppCompatActivity {
                 double lat = person.latitude;
                 double lng = person.longitude;
                 if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
-                    collect.setEnabled(false);
+                    collect.setEnabled(true);
+                    collect.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(ViewPopup.this, "You're out of range!", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
                 else {
                     collect.setEnabled(true);
