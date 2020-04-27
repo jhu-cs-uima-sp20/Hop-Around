@@ -83,6 +83,8 @@ public class ViewPopup extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(ViewPopup.this, "You got it!", Toast.LENGTH_LONG).show();
+                            int pointsForCollect = 7;
+                            //TODO: actually add points to user's hop points for collecting
                         }
                     });
                 }
