@@ -135,10 +135,11 @@ public class PostActivity extends DialogFragment {
         final DatabaseReference popupsRef = dbRoot.child("popups");
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        /*if ((postImg.getDrawable() == null) || popUpName.getText().toString().matches("")) {
+        /*while ((postImg.getDrawable() == null) || popUpName.getText().toString().matches("")) {
             Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
             post.setEnabled(false);
         }*/
+        post.setEnabled(true);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,7 +162,7 @@ public class PostActivity extends DialogFragment {
                     }
                 };
 
-                dbRoot.addListenerForSingleValueEvent(countListener);
+                //dbRoot.addListenerForSingleValueEvent(countListener);
 
                 //Set<String> set = sharedpreferences.getStringSet("key", null);
                 //set.add(popUpTitle);
@@ -229,9 +230,14 @@ public class PostActivity extends DialogFragment {
                         // ...
                     }
                 };
-
-                dbRoot.addListenerForSingleValueEvent(coolListener);
-
+                if (postImg.getDrawable() == null) {
+                    Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
+                } else if (popUpName.getText().toString().matches("")) {
+                    Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    dbRoot.addListenerForSingleValueEvent(coolListener);
+                    dbRoot.addListenerForSingleValueEvent(countListener);
+                }
                 int pointsForPost = 7;
                 //TODO: actually add points to user's hop points for posting
             }
