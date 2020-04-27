@@ -187,7 +187,14 @@ public class MapFragment extends Fragment {
                                         c = Color.GREEN;
                                     }
 
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView, c));
+                                    Bitmap original = getCircleBitmap(popUpView, c);
+                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap(original, 30, 30));
+                                    googleMap.addCircle(new CircleOptions()
+                                            .center(new LatLng(latitude, longitude))
+                                            .radius(15)
+                                            .strokeColor(Color.RED);
+
+
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
 
@@ -333,5 +340,9 @@ public class MapFragment extends Fragment {
         bitmap.recycle();
 
         return output;
+    }
+
+    public Bitmap resizeBitmap(Bitmap bitmap,int width, int height){
+        return Bitmap.createScaledBitmap(bitmap, width, height, false);
     }
 }
