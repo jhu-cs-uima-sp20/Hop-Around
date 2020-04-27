@@ -361,14 +361,13 @@ public class MapFragment extends Fragment {
         paint.setAntiAlias(true);
         stroke.setAntiAlias(true);
 
-        canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
         stroke.setColor(Color.GREEN);
         stroke.setStyle(Paint.Style.STROKE);
-        stroke.setStrokeWidth(5);
+        stroke.setStrokeWidth(100);
         canvas.drawOval(rectS, stroke);
 
-        canvas.drawBitmap(bitmap, rect, rect, paint);
+        canvas.drawBitmap(bitmap, rect, rect, stroke);
         bitmap.recycle();
 
         return output;
