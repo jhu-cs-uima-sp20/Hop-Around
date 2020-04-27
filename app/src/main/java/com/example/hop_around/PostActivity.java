@@ -135,7 +135,10 @@ public class PostActivity extends DialogFragment {
         final DatabaseReference popupsRef = dbRoot.child("popups");
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-
+        /*if ((postImg.getDrawable() == null) || popUpName.getText().toString().matches("")) {
+            Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
+            post.setEnabled(false);
+        }*/
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
