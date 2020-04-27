@@ -39,7 +39,7 @@ public class ViewPopup extends AppCompatActivity {
 
         final Intent intent = getIntent();
         final int i = intent.getIntExtra("refId", 0);
-        Button collect = findViewById(R.id.collect_button);
+        final Button collect = findViewById(R.id.collect_button);
 
         ValueEventListener popupListener = new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -68,10 +68,16 @@ public class ViewPopup extends AppCompatActivity {
                 double lat = person.latitude;
                 double lng = person.longitude;
                 if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
-
+                    collect.setEnabled(false);
                 }
                 else {
-
+                    collect.setEnabled(true);
+                    collect.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //collect
+                        }
+                    });
                 }
 
             }
