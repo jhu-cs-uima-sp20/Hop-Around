@@ -36,6 +36,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -175,6 +177,22 @@ public class MapFragment extends Fragment {
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView));
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
+
+                                    double lat = person.latitude;
+                                    double lng = person.longitude;
+
+                                    if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
+                                         googleMap.addCircle(new CircleOptions()
+                                                .center(new LatLng(latitude, longitude))
+                                                .radius(205)
+                                                .strokeColor(Color.GREEN));
+                                    }
+                                    else {
+                                        googleMap.addCircle(new CircleOptions()
+                                                .center(new LatLng(latitude, longitude))
+                                                .radius(205)
+                                                .strokeColor(Color.GRAY));
+                                    }
                                 }
                             }
 
