@@ -3,7 +3,7 @@ package com.example.hop_around;
 public class PopupItem {
     private int mImageResource;
     private String mName;
-    private int id;
+    private int mid;
 
     public PopupItem(int imageResource, String name, int id) {
         mImageResource = imageResource;
