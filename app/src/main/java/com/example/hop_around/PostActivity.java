@@ -201,8 +201,8 @@ public class PostActivity extends DialogFragment {
                         Bitmap bitmap = ((BitmapDrawable) postImg.getDrawable()).getBitmap();
 
                         Calendar c = Calendar.getInstance();
-                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                        String formattedDate = df.format(c.getTime());
+                        SimpleDateFormat dfx = new SimpleDateFormat("dd-MM-yyyy");
+                        String formattedDate = dfx.format(c.getTime());
                         popupsRef.child(Integer.toString(i)).child("datePosted").setValue(formattedDate);
                         //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                         //final DatabaseReference popupsRef = dbRoot.child("popups");
