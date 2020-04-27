@@ -57,3 +57,30 @@ Attended class and Professor Selinski put us in a breakout room.
 7. Meeting again on Saturday!
  
 
+April 26, 2020 @3PM
+
+Team meeting for 9 hours straight!!! 3pm EST - 12am EST
+Obviously, a lot was completed
+
+
+1. MapFragment was updated, now popups are displayed in the correct locations, can be collected
+2. Can collect a popup only if in range
+3. Having trouble figuring out the border (gree/grey/fade/etc.) signaling if you're in range or not
+4. Profile Fragment had a lot of updates! including editable profile photop, display name, and description
+5. Having trouble implementing the search icon in the action bar menu for one fragment in the Nav Drawer, not all of them
+6. Restructured how we stored pop-ups in firebase so they're easier to access and iterate through
+7. Made use of shared preferences with regards to storing current user data
+8. Detail Page for a popup displays correct name, picture, and tag
+9. Going to keep grinding starting in the morning tomorrow!
+10. More changes/improvements were definitely made, it's hard to keep track of them all
+
+
+
+
+
+
+
+
+
+
+

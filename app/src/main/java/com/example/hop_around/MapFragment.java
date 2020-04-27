@@ -187,8 +187,8 @@ public class MapFragment extends Fragment {
                                         c = Color.GREEN;
                                     }
 
-                                    Bitmap original = getStrokeBitmap(popUpView, c);
-                                    Bitmap circle = getCircleBitmap(original, c);
+                                    Bitmap original = getCircleBitmap(popUpView, c);
+                                    Bitmap circle = getStrokeBitmap(original, c);
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(circle);
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
@@ -322,7 +322,7 @@ public class MapFragment extends Fragment {
         final int color = c;
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
-        final Rect rect = new Rect(0, 0, 200, 200);
+        final Rect rect = new Rect(0, 0, 150, 150);
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
@@ -355,8 +355,8 @@ public class MapFragment extends Fragment {
         final int color = c;
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
-        final Rect rect = new Rect(0, 0, 200, 200);
-        final RectF rectS = new RectF(0, 0, 200, 200);
+        final Rect rect = new Rect(0, 0, 150, 150);
+        final RectF rectS = new RectF(rect);
 
         paint.setAntiAlias(true);
         stroke.setAntiAlias(true);
@@ -364,10 +364,12 @@ public class MapFragment extends Fragment {
         paint.setColor(color);
         stroke.setColor(c);
         stroke.setStyle(Paint.Style.STROKE);
-        stroke.setStrokeWidth(30);
+        stroke.setStrokeWidth(10);
 
-        canvas.drawOval(rectS, stroke);
+        canvas.drawOval(rectS, paint);
         canvas.drawBitmap(bitmap, rect, rect, paint);
+        canvas.drawOval(rectS, stroke);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         bitmap.recycle();
 
         return output;
