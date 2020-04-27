@@ -69,7 +69,7 @@ public class CollectionFragment extends Fragment {
             }
         };
 
-        usersRef.addListenerForSingleValueEvent(swagListener);
+        dbRoot.addListenerForSingleValueEvent(swagListener);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);
         mRecyclerView.setHasFixedSize(true);
