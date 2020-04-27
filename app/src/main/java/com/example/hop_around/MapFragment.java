@@ -322,7 +322,7 @@ public class MapFragment extends Fragment {
         final int color = c;
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
-        final Rect rect = new Rect(0, 0, 200, 200);
+        final Rect rect = new Rect(0, 0, 150, 150);
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
@@ -355,7 +355,7 @@ public class MapFragment extends Fragment {
         final int color = c;
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
-        final Rect rect = new Rect(0, 0, 200, 200);
+        final Rect rect = new Rect(0, 0, 150, 150);
         final RectF rectS = new RectF(rect);
 
         paint.setAntiAlias(true);
