@@ -3,10 +3,12 @@ package com.example.hop_around;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -34,8 +37,9 @@ public class ViewPopup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_popup);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final int i = intent.getIntExtra("refId", 0);
+        Button collect = findViewById(R.id.collect_button);
 
         ValueEventListener popupListener = new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -60,6 +64,15 @@ public class ViewPopup extends AppCompatActivity {
 
                 ImageView popupImage = findViewById(R.id.popup_image);
                 popupImage.setImageBitmap(popUpView);
+                LatLng person = intent.getExtras().getParcelable("person");
+                double lat = person.latitude;
+                double lng = person.longitude;
+                if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
+
+                }
+                else {
+
+                }
 
             }
 
