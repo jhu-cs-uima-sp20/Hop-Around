@@ -192,7 +192,7 @@ public class MapFragment extends Fragment {
                                     googleMap.addCircle(new CircleOptions()
                                             .center(new LatLng(latitude, longitude))
                                             .radius(15)
-                                            .strokeColor(Color.RED);
+                                            .strokeColor(Color.RED));
 
 
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
