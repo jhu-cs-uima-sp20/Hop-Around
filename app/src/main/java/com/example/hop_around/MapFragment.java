@@ -178,14 +178,6 @@ public class MapFragment extends Fragment {
                                     double lng = person.longitude;
 
 
-                                    Canvas canvas = new Canvas(bitmap);
-
-                                    Paint color = new Paint();
-                                    color.setTextSize(35);
-                                    color.setColor(Color.BLACK);
-
-                                    canvas1.drawBitmap(BitmapFactory.decodeResource(getResources(),
-                                            R.drawable.user_picture_image), 0,0, color);
 
                                     if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
 
