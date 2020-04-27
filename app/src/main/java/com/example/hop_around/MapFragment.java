@@ -188,6 +188,7 @@ public class MapFragment extends Fragment {
                                     }
 
                                     Bitmap original = getCircleBitmap(popUpView, c);
+                                    Bitmap circle = getStrokeBitmap(original, c);
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(original);
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
@@ -329,7 +330,7 @@ public class MapFragment extends Fragment {
 
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
-        stroke.setColor(color);
+        stroke.setColor(Color.GREEN);
         stroke.setStyle(Paint.Style.STROKE);
         stroke.setStrokeWidth(5);
         canvas.drawOval(rectF, stroke);
@@ -341,6 +342,33 @@ public class MapFragment extends Fragment {
         canvas.drawBitmap(bitmap, rect, rect, stroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
         canvas.drawBitmap(bitmap, rect, rect, stroke);
+        bitmap.recycle();
+
+        return output;
+    }
+
+    private Bitmap getStrokeBitmap(Bitmap bitmap, int c) {
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(output);
+
+        final int color = c;
+        final Paint paint = new Paint();
+        final Paint stroke = new Paint();
+        final Rect rect = new Rect(0, 0, 200, 200);
+        final RectF rectS = new RectF(10, 10, 190, 190);
+
+        paint.setAntiAlias(true);
+        stroke.setAntiAlias(true);
+
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        stroke.setColor(Color.GREEN);
+        stroke.setStyle(Paint.Style.STROKE);
+        stroke.setStrokeWidth(5);
+        canvas.drawOval(rectS, stroke);
+
+        canvas.drawBitmap(bitmap, rect, rect, paint);
         bitmap.recycle();
 
         return output;
