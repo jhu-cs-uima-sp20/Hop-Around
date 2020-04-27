@@ -12,7 +12,9 @@
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="monospace"
         android:text="Popup Name"
+        android:textColor="#00000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
+        android:fontFamily="monospace"
         android:text="Tag "
+        android:textColor="#00000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_popup_toolbar" />
 
@@ -44,6 +48,7 @@
         android:layout_width="75dp"
         android:layout_height="17dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="monospace"
         android:text="Posted By:"
         app:layout_constraintEnd_toStartOf="@+id/posted-user"
         app:layout_constraintHorizontal_bias="0.5"
