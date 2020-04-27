@@ -68,6 +68,9 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                         int id = getResources().getIdentifier(viewString, "id", "com.example.hop_around");
                         ImageView one = view.findViewById(id);
                         one.setImageBitmap(StringToBitMap(bitmap));
+
+
+
                     }
                 }
                 int pts = Math.toIntExact((long) dataSnapshot.child("users").child(UID).child("pts").getValue());
@@ -81,6 +84,10 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                 desc.setText(description);
                 hpts.setText("Hop Points: "+pts);
                 sentence.setText(display + "'s Recently Collected");
+                ImageView pic = view.findViewById(R.id.profile_photo);
+                Bitmap btm = StringToBitMap(""+dataSnapshot.child("users").child(UID).child("pfp").getValue());
+                pic.setImageBitmap(btm);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

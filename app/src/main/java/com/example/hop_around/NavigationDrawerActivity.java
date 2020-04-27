@@ -11,12 +11,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -92,6 +96,8 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
             final TextView pointCount = (TextView) headerView.findViewById(R.id.pts);
             final TextView displayName = (TextView) headerView.findViewById(R.id.disp);
+            final ImageView pic = (ImageView) headerView.findViewById(R.id.navhead);
+
             final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
             SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
             final String UID = sharedPreferences.getString("UID", "kidPizza");
@@ -102,8 +108,11 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                     int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
                     String pts = "Hop Pts: " + Integer.toString(q);
                     String display = "" + dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                    Bitmap btm = StringToBitMap(""+dataSnapshot.child("users").child(UID).child("pfp").getValue());
+
                     pointCount.setText(pts);
                     displayName.setText(display);
+                    pic.setImageBitmap(btm);
                 }
 
                 @Override
@@ -195,7 +204,16 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
 
 
 
