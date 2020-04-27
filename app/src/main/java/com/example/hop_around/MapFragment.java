@@ -355,7 +355,7 @@ public class MapFragment extends Fragment {
         final int color = c;
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
-        final Rect rect = new Rect(0, 0, 60, 60);
+        final Rect rect = new Rect(0, 0, 100, 100);
         final RectF rectS = new RectF(rect);
 
         paint.setAntiAlias(true);
@@ -366,8 +366,10 @@ public class MapFragment extends Fragment {
         stroke.setStyle(Paint.Style.STROKE);
         stroke.setStrokeWidth(30);
 
-        canvas.drawOval(rectS, stroke);
+        canvas.drawOval(rectS, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
+        canvas.drawOval(rectS, stroke);
         bitmap.recycle();
 
         return output;
