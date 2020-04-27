@@ -174,25 +174,25 @@ public class MapFragment extends Fragment {
                                     Double longitude = Double.parseDouble(y);
                                     LatLng position = new LatLng(latitude, longitude);
 
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView));
-                                    Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
-                                    m.setTag(i);
-
                                     double lat = person.latitude;
                                     double lng = person.longitude;
 
+                                    String color;
+
                                     if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
-                                         googleMap.addCircle(new CircleOptions()
-                                                .center(new LatLng(latitude, longitude))
-                                                .radius(205)
-                                                .strokeColor(Color.GREEN));
+                                        color = "green";
                                     }
                                     else {
-                                        googleMap.addCircle(new CircleOptions()
-                                                .center(new LatLng(latitude, longitude))
-                                                .radius(205)
-                                                .strokeColor(Color.GRAY));
+                                        color = "gray";
                                     }
+
+                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView));
+                                    Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon).strokeColor());
+                                    m.setTag(i);
+
+
+
+
                                 }
                             }
 
@@ -229,6 +229,7 @@ public class MapFragment extends Fragment {
                                 myIntent.putExtra("tag", tag);
                                 myIntent.putExtra("x", x);
                                 myIntent.putExtra("y", y);
+                                myIntent.putExtra("person", person);
                                 getActivity().startActivity(myIntent);
                                 //editor.putInt("refId", refId);
                         //startActivity(new Intent(getActivity(), ViewPopup.class));*/
