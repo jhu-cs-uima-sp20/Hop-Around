@@ -31,7 +31,10 @@ public class CollectionFragment extends Fragment {
         mPopupList.add(new PopupItem(R.drawable.ic_launcher_background, "Name 2", 1));
         mPopupList.add(new PopupItem(R.drawable.ic_map, "Name 3", 2));
 
+
         /*
+
+
         for (int i = 0; i < ....) {
             mPopupList.add(new PopupItem(image,  title, id ));
         }
