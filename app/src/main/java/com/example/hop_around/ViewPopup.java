@@ -33,6 +33,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class ViewPopup extends AppCompatActivity {
     final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
 
@@ -61,12 +64,24 @@ public class ViewPopup extends AppCompatActivity {
                 String tag = (String) dataSnapshot.child("popups").child(""+i).child("tag").getValue();
                 String x = (String) dataSnapshot.child("popups").child(""+i).child("x").getValue();
                 String y = (String) dataSnapshot.child("popups").child(""+i).child("y").getValue();
-
+                String date = (String) dataSnapshot.child("popups").child(""+i).child("datePosted").getValue();
                 Bitmap popUpView = StringToBitMap(bitmap);
                 Double latitude = Double.parseDouble(x);
                 Double longitude = Double.parseDouble(y);
                 LatLng position = new LatLng(latitude, longitude);
 
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat dfx = new SimpleDateFormat("dd-MM-yyyy");
+                String formattedDate = dfx.format(c.getTime());
+                TextView active = findViewById(R.id.active);
+                if(date.equals(formattedDate)){
+                    active.setText("Active");
+                }
+                else{
+                    active.setText("Inactive");
+                }
+                TextView poster = findViewById(R.id.posted_by);
+                poster.setText(""+dataSnapshot.child("popups").child(""+i).child("postedBy").getValue());
                 TextView nameView = findViewById(R.id.popup_name);
                 nameView.setText(title);
 

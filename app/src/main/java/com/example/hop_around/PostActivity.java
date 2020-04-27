@@ -214,6 +214,8 @@ public class PostActivity extends DialogFragment {
                         System.out.println("Chip Set");
                         popupsRef.child(Integer.toString(i)).child("tag").setValue(chip.getText().toString());
 
+                        popupsRef.child(Integer.toString(i)).child("postedBy").setValue(UID);
+
 
                         double maxX = 39.333977;
                         double minX = 39.326170;
