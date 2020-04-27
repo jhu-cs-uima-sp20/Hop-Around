@@ -326,6 +326,7 @@ public class MapFragment extends Fragment {
         paint.setStrokeWidth(5);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
+        paint.setStyle(Paint.Style.STROKE);
         canvas.drawOval(rectF, paint);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
