@@ -7,10 +7,12 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -174,8 +176,43 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.search_menu, menu);
+        //inflater.inflate(R.menu.search_menu, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+
         super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.search_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = new SearchView(((NavigationDrawerActivity) getContext()).getSupportActionBar().getThemedContext());
+
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        item.setActionView(searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //user presses enter
+                //TODO SEARCH DATABASE FOR NAME
+
+
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //user types a new character, TODO should search suggestions should be updated?
+                return false;
+            }
+        });
+
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //don't think I need anything in here
+            }
+        });
+
     }
 
 }
