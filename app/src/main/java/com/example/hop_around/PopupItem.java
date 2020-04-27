@@ -20,6 +20,6 @@ public class PopupItem {
     }
 
     public int getId() {
-        return id;
+        return mid;
     }
 }
