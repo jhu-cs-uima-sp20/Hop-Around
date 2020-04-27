@@ -1,5 +1,6 @@
 package com.example.hop_around;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,6 +45,9 @@ public class ViewPopup extends AppCompatActivity {
         final Intent intent = getIntent();
         final int i = intent.getIntExtra("refId", 0);
         final Button collect = findViewById(R.id.collect_button);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ValueEventListener popupListener = new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -128,8 +133,11 @@ public class ViewPopup extends AppCompatActivity {
         };
 
         dbRoot.addListenerForSingleValueEvent(popupListener);
+    }
 
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
     }
 
     public Bitmap StringToBitMap(String encodedString){
