@@ -57,7 +57,7 @@ public class CollectionFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int b = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
                 for (int i = 0; i < b; i++) {
-                    if (dataSnapshot.child(UID).hasChild(""+ i)){
+                    if (dataSnapshot.child("users").child(UID).hasChild(""+ i)){
                         String title = (String) dataSnapshot.child("popups").child("" + i).child("title").getValue();
                         String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
                         mPopupList.add(new PopupItem(StringToBitMap(bitmap),  title, i));
@@ -68,7 +68,6 @@ public class CollectionFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
-
         dbRoot.addListenerForSingleValueEvent(swagListener);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);

@@ -85,7 +85,7 @@ public class ViewPopup extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(ViewPopup.this, "You got it!", Toast.LENGTH_LONG).show();
-                            int pointsForCollect = 7;
+                            final int pointsForCollect = 7;
                             final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                             final DatabaseReference popupsRef = dbRoot.child("popups");
                             final DatabaseReference usersRef = dbRoot.child("users");
@@ -96,7 +96,7 @@ public class ViewPopup extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
-                                    int b = q + 1;
+                                    int b = q + pointsForCollect;
                                     dbRoot.child("users").child(UID).child("pts").setValue(b);
                                     dbRoot.child("users").child(UID).child(""+i).setValue(1);
                                 }
