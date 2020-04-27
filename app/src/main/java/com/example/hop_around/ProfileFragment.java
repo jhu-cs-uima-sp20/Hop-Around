@@ -32,6 +32,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class ProfileFragment extends Fragment { //implements View.OnClickListener
 
@@ -252,9 +257,31 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(final String query) {
                 //user presses enter
                 //TODO SEARCH DATABASE FOR NAME
+
+                //SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                //final String UID = sharedPreferences.getString("UID", "kidPizza");
+                final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                ValueEventListener swagListener = new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("users").hasChild(query)){
+                            //.putExtraString(query)
+                            //launch activity other profile
+                        }
+                        else{
+                            //do nothing
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                };
+                dbRoot.addListenerForSingleValueEvent(swagListener);
 
 
                 return false;
