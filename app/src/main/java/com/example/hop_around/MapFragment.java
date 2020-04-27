@@ -177,16 +177,17 @@ public class MapFragment extends Fragment {
                                     double lat = person.latitude;
                                     double lng = person.longitude;
 
+                                    int c;
 
 
                                     if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
-
+                                        c = Color.GREEN;
                                     }
                                     else {
-
+                                        c = Color.GRAY;
                                     }
 
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView));
+                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView, c));
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
 
@@ -311,17 +312,18 @@ public class MapFragment extends Fragment {
         mMapView.onLowMemory();
     }
 
-    private Bitmap getCircleBitmap(Bitmap bitmap) {
+    private Bitmap getCircleBitmap(Bitmap bitmap, int c) {
         final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(output);
 
-        final int color = Color.RED;
+        final int color = c;
         final Paint paint = new Paint();
         final Rect rect = new Rect(0, 0, 200, 200);
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
+        paint.setStrokeWidth(5);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
         canvas.drawOval(rectF, paint);
@@ -333,4 +335,6 @@ public class MapFragment extends Fragment {
 
         return output;
     }
+
+
 }
