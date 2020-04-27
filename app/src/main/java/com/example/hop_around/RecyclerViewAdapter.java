@@ -44,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PopupItem currentItem = mPopupList.get(position);
-        holder.popup_image.setImageResource(currentItem.getImageResource());
+        holder.popup_image.setImageBitmap(currentItem.getImageResource());
         holder.popup_name.setText(currentItem.getName());
 
     }
