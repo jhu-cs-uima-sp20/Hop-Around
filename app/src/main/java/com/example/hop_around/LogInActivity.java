@@ -83,7 +83,7 @@ public class LogInActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(finalUserID)) {
                             if (dataSnapshot.child(finalUserID).child("password").getValue().equals(password)){
-                                Intent startMap = new Intent(LogInActivity.this, MapsView.class);
+                                Intent startMap = new Intent(LogInActivity.this, NavigationDrawerActivity.class);
                                 SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                                 myEdit.putString("UID", finalUserID);

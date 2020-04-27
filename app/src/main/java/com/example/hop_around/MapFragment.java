@@ -181,13 +181,15 @@ public class MapFragment extends Fragment {
 
 
                                     if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
-                                        c = Color.GREEN;
-                                    }
-                                    else {
                                         c = Color.GRAY;
                                     }
+                                    else {
+                                        c = Color.GREEN;
+                                    }
 
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView, c));
+                                    Bitmap original = getCircleBitmap(popUpView, c);
+                                    Bitmap circle = getStrokeBitmap(original, c);
+                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(circle);
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
 
@@ -319,23 +321,60 @@ public class MapFragment extends Fragment {
 
         final int color = c;
         final Paint paint = new Paint();
+        final Paint stroke = new Paint();
         final Rect rect = new Rect(0, 0, 200, 200);
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
-        paint.setStrokeWidth(5);
+        stroke.setAntiAlias(true);
+
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
-        paint.setStyle(Paint.Style.STROKE);
+        stroke.setColor(Color.GREEN);
+        stroke.setStyle(Paint.Style.STROKE);
+        stroke.setStrokeWidth(5);
+        canvas.drawOval(rectF, stroke);
         canvas.drawOval(rectF, paint);
+        canvas.drawOval(rectF, stroke);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        stroke.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, stroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
-
+        canvas.drawBitmap(bitmap, rect, rect, stroke);
         bitmap.recycle();
 
         return output;
     }
 
+    private Bitmap getStrokeBitmap(Bitmap bitmap, int c) {
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(output);
 
+        final int color = c;
+        final Paint paint = new Paint();
+        final Paint stroke = new Paint();
+        final Rect rect = new Rect(0, 0, 200, 200);
+        final RectF rectS = new RectF(0, 0, 200, 200);
+
+        paint.setAntiAlias(true);
+        stroke.setAntiAlias(true);
+
+        paint.setColor(color);
+        stroke.setColor(c);
+        stroke.setStyle(Paint.Style.STROKE);
+        stroke.setStrokeWidth(30);
+        canvas.drawOval(rectS, stroke);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        bitmap.recycle();
+
+        return output;
+    }
+
+    public Bitmap resizeBitmap(Bitmap bitmap,int width, int height){
+        return Bitmap.createScaledBitmap(bitmap, width, height, false);
+    }
 }

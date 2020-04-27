@@ -1,12 +1,14 @@
 package com.example.hop_around;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -83,6 +85,26 @@ public class ViewPopup extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(ViewPopup.this, "You got it!", Toast.LENGTH_LONG).show();
+                            final int pointsForCollect = 7;
+                            final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+                            final DatabaseReference popupsRef = dbRoot.child("popups");
+                            final DatabaseReference usersRef = dbRoot.child("users");
+                            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                            final String UID = sharedPreferences.getString("UID", "kidPizza");
+
+                            ValueEventListener incrementListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
+                                    int b = q + pointsForCollect;
+                                    dbRoot.child("users").child(UID).child("pts").setValue(b);
+                                    dbRoot.child("users").child(UID).child(""+i).setValue(1);
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            };
+                            dbRoot.addListenerForSingleValueEvent(incrementListener);
                         }
                     });
                 }

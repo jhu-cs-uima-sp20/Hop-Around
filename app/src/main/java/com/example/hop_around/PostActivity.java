@@ -135,7 +135,10 @@ public class PostActivity extends DialogFragment {
         final DatabaseReference popupsRef = dbRoot.child("popups");
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-
+        /*if ((postImg.getDrawable() == null) || popUpName.getText().toString().matches("")) {
+            Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
+            post.setEnabled(false);
+        }*/
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,13 +182,13 @@ public class PostActivity extends DialogFragment {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        int i =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
+                        int i = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
                         popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
                         popupsRef.child(Integer.toString(i)).child("id").setValue(i);
                         popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
                         popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
 
-                        Bitmap bitmap = ((BitmapDrawable)postImg.getDrawable()).getBitmap();
+                        Bitmap bitmap = ((BitmapDrawable) postImg.getDrawable()).getBitmap();
 
                         //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                         //final DatabaseReference popupsRef = dbRoot.child("popups");
@@ -203,10 +206,10 @@ public class PostActivity extends DialogFragment {
 
                         DecimalFormat df = new DecimalFormat(".######");
                         double diffX = maxX - minX;
-                        double randomValueX = minX + Math.random( ) * diffX;
+                        double randomValueX = minX + Math.random() * diffX;
 
                         double diffY = maxY - minY;
-                        double randomValueY = minY + Math.random( ) * diffY;
+                        double randomValueY = minY + Math.random() * diffY;
 
                         System.out.println(df.format(randomValueX));
                         System.out.println(df.format(randomValueY));
@@ -228,6 +231,9 @@ public class PostActivity extends DialogFragment {
                 };
 
                 dbRoot.addListenerForSingleValueEvent(coolListener);
+
+                int pointsForPost = 7;
+                //TODO: actually add points to user's hop points for posting
             }
         });
 

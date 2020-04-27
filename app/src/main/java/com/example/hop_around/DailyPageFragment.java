@@ -35,9 +35,6 @@ public class DailyPageFragment extends Fragment {
         //menuItem.setVisible(false);
 
         mPopupList = new ArrayList<>();
-        mPopupList.add(new PopupItem(R.drawable.ic_person, "Name 1", 0));
-        mPopupList.add(new PopupItem(R.drawable.ic_launcher_background, "Name 2", 1));
-        mPopupList.add(new PopupItem(R.drawable.ic_map, "Name 3", 2));
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);
         mRecyclerView.setHasFixedSize(true);
