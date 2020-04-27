@@ -27,7 +27,7 @@
             android:layout_height="48dp" />
 
         <EditText
-            android:id="@+id/display_name"
+            android:id="@+id/pts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/display_name" />
