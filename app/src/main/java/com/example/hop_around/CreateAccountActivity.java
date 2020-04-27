@@ -140,6 +140,4 @@ public class CreateAccountActivity extends AppCompatActivity {
         dbRoot.child("users").child(email).child("pfp").setValue("default");
         dbRoot.child("users").child(email).child("description").setValue("Hi there!\nThis is my default description!\nClick the pencil to edit");
     }
-
-
 }
