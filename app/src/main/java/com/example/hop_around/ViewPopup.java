@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -75,7 +76,7 @@ public class ViewPopup extends AppCompatActivity {
                     collect.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //collect
+                            Toast.makeText(ViewPopup.this, "You got it!", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
