@@ -3,7 +3,9 @@ package com.example.hop_around;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +22,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
@@ -72,13 +78,14 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
             cursor.close();
 
 
-                Bitmap bmp = uriToBitmap(selectedImage);
+            Bitmap bmp = uriToBitmap(selectedImage);
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+            final String UID = sharedPreferences.getString("UID", "kidPizza");
+            final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+            dbRoot.child("users").child(UID).child("pfp").setValue(BitMapToString(bmp));
 
             ImageView profile = findViewById(R.id.image_to_upload);
             profile.setImageBitmap(bmp);
-            //finish();
-            //to know about the selected image width and height
-            //Toast.makeText(MainActivity.this, image_view.getDrawable().getIntrinsicWidth()+" & "+image_view.getDrawable().getIntrinsicHeight(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -137,6 +144,14 @@ public class EditProfilePhotoActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         //finish();
+    }
+
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 
 }
