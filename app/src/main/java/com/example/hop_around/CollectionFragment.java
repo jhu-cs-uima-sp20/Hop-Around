@@ -93,6 +93,8 @@ public class CollectionFragment extends Fragment {
         Intent intent = new Intent(getActivity(), ViewPopup.class);
         PopupItem item = mPopupList.get(position);
         intent.putExtra("refId", item.getId());
+        LatLng person = new LatLng(0.0,0.0);
+        intent.putExtra("person", person);
         startActivity(intent);
     }
 

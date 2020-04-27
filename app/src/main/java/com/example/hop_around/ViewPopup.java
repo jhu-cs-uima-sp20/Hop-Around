@@ -74,7 +74,12 @@ public class ViewPopup extends AppCompatActivity {
                 LatLng person = intent.getExtras().getParcelable("person");
                 double lat = person.latitude;
                 double lng = person.longitude;
-                if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
+                if ((lat == 0.0) && (lng == 0.0)) {
+                    collect.setEnabled(false);
+                    collect.setVisibility(View.GONE);
+                    //Toast.makeText(ViewPopup.this, "Cant collect from here!", Toast.LENGTH_LONG).show();
+
+                } else if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
                     collect.setEnabled(true);
                     collect.setOnClickListener(new View.OnClickListener() {
                         @Override
