@@ -60,6 +60,7 @@ public class CollectionFragment extends Fragment {
                         String title = (String) dataSnapshot.child("popups").child("" + i).child("title").getValue();
                         String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
                         mPopupList.add(new PopupItem(StringToBitMap(bitmap), title, i));
+                        mAdapter.notifyDataSetChanged();
                     }
                 }
             }
