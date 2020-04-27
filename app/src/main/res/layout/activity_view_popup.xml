@@ -18,15 +18,15 @@
 
     <ImageView
         android:id="@+id/popup_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="407dp"
+        android:layout_height="497dp"
         android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popup_name"
-        app:srcCompat="@color/colorAccent"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"/>
+        app:srcCompat="@color/colorAccent" />
 
     <TextView
         android:id="@+id/popup_tag"
