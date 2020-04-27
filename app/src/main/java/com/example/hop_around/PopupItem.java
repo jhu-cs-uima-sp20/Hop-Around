@@ -1,17 +1,19 @@
 package com.example.hop_around;
 
+import android.graphics.Bitmap;
+
 public class PopupItem {
-    private int mImageResource;
+    private Bitmap mImageResource;
     private String mName;
     private int mid;
 
-    public PopupItem(int imageResource, String name, int id) {
+    public PopupItem(Bitmap imageResource, String name, int id) {
         mImageResource = imageResource;
         mName = name;
         mid = id;
     }
 
-    public int getImageResource() {
+    public Bitmap getImageResource() {
         return mImageResource;
     }
 
