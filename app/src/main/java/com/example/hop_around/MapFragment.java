@@ -187,8 +187,9 @@ public class MapFragment extends Fragment {
                                         c = Color.GREEN;
                                     }
 
-                                    Bitmap original = getStrokeBitmap(popUpView, c);
-                                    Bitmap circle = getCircleBitmap(original, c);
+                                    Bitmap original = getCircleBitmap(popUpView, c);
+                                    Bitmap circle = getStrokeBitmap(original, c);
+                                    circle = getCircleBitmap(circle, c);
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(circle);
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
