@@ -43,37 +43,37 @@ public class CollectionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_collection, container, false);
+        View view = inflater.inflate(R.layout.fragment_collection, container, false);
         mPopupList = new ArrayList<>();
-
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
         final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
         DatabaseReference usersRef = dbRoot.child("users");
-            ValueEventListener swagListener = new ValueEventListener() {
-                @RequiresApi(api = Build.VERSION_CODES.N)
-                @Override
+        ValueEventListener swagListener = new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int b = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
                 for (int i = 0; i < b; i++) {
-                    if (dataSnapshot.child("users").child(UID).hasChild(""+ i)){
+                    if (dataSnapshot.child("users").child(UID).hasChild("" + i)) {
                         String title = (String) dataSnapshot.child("popups").child("" + i).child("title").getValue();
                         String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
-                        mPopupList.add(new PopupItem(StringToBitMap(bitmap),  title, i));
+                        mPopupList.add(new PopupItem(StringToBitMap(bitmap), title, i));
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
         dbRoot.addListenerForSingleValueEvent(swagListener);
-
+        mPopupList.add(new PopupItem(StringToBitMap("bangohanwotabetai,ofuronihaitai,soretomo,watashi"), "title", 5));
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new RecyclerViewAdapter(mPopupList );
+        mAdapter = new RecyclerViewAdapter(mPopupList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -94,13 +94,13 @@ public class CollectionFragment extends Fragment {
         intent.putExtra("refId", item.getId());
         startActivity(intent);
     }
-    public Bitmap StringToBitMap(String encodedString){
-        try{
-            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             return bitmap;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.getMessage();
             return null;
         }
