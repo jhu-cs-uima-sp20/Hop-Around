@@ -64,9 +64,8 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                         }
                         else{
                             displayName.setEnabled(false);
-                            successfulEdit(0);
-                            Toast.makeText(getContext(), "New Display Name Saved!", Toast.LENGTH_LONG).show();
-                            dbRoot.child("users").child(UID).child("displayName").setValue(displayName.getText().toString());
+                            String S = displayName.getText().toString();
+                            successfulEdit(0, S);
                                     //TODO put in a METHOD
                         }
                     }
@@ -79,7 +78,8 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
                             displayName.setEnabled(false);
-                            successfulEdit(0);
+                            String S = displayName.getText().toString();
+                            successfulEdit(0, S);
                             //TODO call same method as above in focusChangeListener
                             return true;
                         }
@@ -107,8 +107,8 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                                 }
                                 else{
                                     description.setEnabled(false);
-                                    successfulEdit(1);
-                                    //TODO write to Database, save data, maybe have a toast saying New Display Name Saved!
+                                    String S = description.getText().toString();
+                                    successfulEdit(1, S);
                                         //TODO put in a METHOD
                                 }
                             }
@@ -123,7 +123,8 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
                             description.setEnabled(false);
-                            successfulEdit(1);
+                            String S = description.getText().toString();
+                            successfulEdit(1, S);
                             return true;
                         }
                         return false;
@@ -135,12 +136,12 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
 
         ImageView profilePhoto = (ImageView) view.findViewById(R.id.profile_photo);
         profilePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
 
-                Intent editPic = new Intent(getActivity(), EditProfilePhotoActivity.class);
-                startActivity(editPic);
-                successfulEdit(2);
+                        Intent editPic = new Intent(getActivity(), EditProfilePhotoActivity.class);
+                        startActivity(editPic);
+                        successfulEdit(2);
             }
         });
 
@@ -153,22 +154,29 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         return view;
     }
 
-    public void successfulEdit(int field) {
+    public void successfulEdit(int field, String S) {
 
         Context context = this.getContext();
         CharSequence text = "";
         int duration = Toast.LENGTH_SHORT;
 
+        final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        final String UID = sharedPreferences.getString("UID", "kidPizza");
+
         //TODO SAVE EDITED FIELD TO FIREBASE DB
 
         if (field == 0) { //displayName
             text = "New Display Name Saved";
+            dbRoot.child("users").child(UID).child("displayName").setValue(S);
         }
         else if (field == 1) { //description
             text = "New Description Saved";
+            dbRoot.child("users").child(UID).child("description").setValue(S);
         }
         else if (field == 2) { //profilePhoto
             text = "New Profile Photo Saved";
+            //dbRoot.child("users").child(UID).child("pfp").setValue(S);
             //TODO need to re-update profile photo/display the new one if not happening automatically
                 //DON'T NEED TO SAVE TO DB, because edit profile activity already does.
         }
