@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                         //mAdapter.notifyDataSetChanged();
                     }
                 }
-                int pts = (int) dataSnapshot.child("users").child(UID).child("pts").getValue();
+                int pts = Math.toIntExact((long) dataSnapshot.child("users").child(UID).child("pts").getValue());
                 String display = ""+dataSnapshot.child("users").child(UID).child("displayName").getValue();
                 String description = ""+dataSnapshot.child("users").child(UID).child("description").getValue();
                 TextView name = view.findViewById(R.id.profile_display_name);
@@ -77,7 +77,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                 TextView hpts = view.findViewById(R.id.disp);
                 name.setText(display);
                 desc.setText(description);
-                hpts.setText(pts);
+                hpts.setText("Hop Points: "+pts);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
