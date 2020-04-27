@@ -1,6 +1,7 @@
 package com.example.hop_around;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,7 +36,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +51,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -62,6 +67,7 @@ public class MapFragment extends Fragment {
     SharedPreferences.Editor editor;
     final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
     final DatabaseReference popupsRef = dbRoot.child("popups");
+    LatLng person;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,30 +123,32 @@ public class MapFragment extends Fragment {
                 //googleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+
+
+                double maxX = 39.333977;
+                double minX = 39.326170;
+                double minY = -76.624140;
+                double maxY = -76.618813;
+
+                DecimalFormat df = new DecimalFormat(".######");
+                double diffX = maxX - minX;
+                double randomValueX = minX + Math.random( ) * diffX;
+
+                double diffY = maxY - minY;
+                double randomValueY = minY + Math.random( ) * diffY;
+
+                person = new LatLng(randomValueX, randomValueY);
+                googleMap.addMarker(new MarkerOptions().position(person).title("User"));
+
+
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(person).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
-                        /*
-                        String bitmap = "iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAT6ElEQVR42tVZCXhU1dn+zr2z7zOZ7AnZCFlZkxBW2SJL2E0ElLJIlapVbBVU9C/8WPmtFKRaRaFQC5RFURAw7IQAAcKWfYHs22QmM5PZ95l7T89Q9dEWClp9fP7vec6TmXNPzn3f73zrGQT/D+TRjacom8MtZQJ+95k3C33ffoZ+bnD3k2e3loxvNrje9fr8mYzd+lnp5sXzf1YCnc3lfJZlBJgNIDJsielj2XutfWXXxcmnq3WHekw2kd/jx7lKz6ZjH/xm1c9KoL3xxkyvx/6Zw2JEIerQLr5I9FcyvScyfnj7t9f97t2dKVcM1JUrbS6ln8ODaJvFPWVkYuJHL8/W/awEmmrO036/p9Zu7EyVyhRYKJEhRIOLJ1AsikrIPfj1upVr3j5gPfdxgY4RAx0/rEMxvKBCxOW+uOXXk75D9GfxgdqrRRt8rr5VfD4P03we4gkk2Odxu/li9fCE1NF1x04Xj7V2Np04u/MDYVK0utydkV9QIx/ythqobX95fmLxT05g99HjaYjD5f5iWl71t+dP/umNx4Uhik+FMf3SzIb2Ci6PT0fHxQDLYsAs4xcqov9udHBew7TgRl1Le7TfbinCurZHl7/8unvSO2dvieyunUfXznzrJyWw85PPkEajOdKvf/LqX8zKr/16/uK7r2T3aXrenLNh99TP9+ygLFZnW1t1Rey8hZMruQLJ55gnP2pxo0Y3Kzhmd7rG95qslSIeZ8qiufmGVR9f4H9a3avLkHK2Hntj7qs/KYG9nx6Y0mt1fCKXiOOWPTbPGpwr2/wcx6btKuGq4oomvPreWzv/+vGosmtXL+Tm5Pw2RAJbZs7/JVN05nTQlN6va+58hiMPNaj4aOTj+RNav973VxtPvIh5nNPbVuTV/GQEtm7/q8hmMZcrQsPYp5YsSv96vuKDF57VVF55Tz54anKTi9vZ5QiUqMMi+miaKnj6mV8xwTX7i8680KY1";
-                        String x = "5.0";
-                        String y = "5.0";
-                        String tag = "random";
-                        String title = "dummy";
-                        final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
-                        final DatabaseReference popupsRef = dbRoot.child("popups");
-                        popupsRef.child(title).child("x").setValue(x);
-                        popupsRef.child(title).child("y").setValue(y);
-                        popupsRef.child(title).child("title").setValue(title);
-                        popupsRef.child(title).child("tag").setValue(tag);
-                        popupsRef.child(title).child("bitmap").setValue(bitmap);
-                         */
                         ValueEventListener popupsListListener = new ValueEventListener() {
                             @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
@@ -153,21 +161,39 @@ public class MapFragment extends Fragment {
                                     editor.commit();
 
                                 }*/
-                                int b =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
+                                int b = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
 
-                                for (int i = 0; i <= b; i++) {
-                                    String bitmap = (String) dataSnapshot.child("popups").child(""+i).child("bitmap").getValue();
-                                    String tag = (String) dataSnapshot.child("popups").child(""+i).child("tag").getValue();
-                                    String x = (String) dataSnapshot.child("popups").child(""+i).child("x").getValue();
-                                    String y = (String) dataSnapshot.child("popups").child(""+i).child("y").getValue();
+                                for (int i = 0; i < b; i++) {
+                                    String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
+                                    String tag = (String) dataSnapshot.child("popups").child("" + i).child("tag").getValue();
+                                    String x = (String) dataSnapshot.child("popups").child("" + i).child("x").getValue();
+                                    String y = (String) dataSnapshot.child("popups").child("" + i).child("y").getValue();
 
                                     Bitmap popUpView = StringToBitMap(bitmap);
                                     Double latitude = Double.parseDouble(x);
                                     Double longitude = Double.parseDouble(y);
                                     LatLng position = new LatLng(latitude, longitude);
 
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView));
-                                    googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
+                                    double lat = person.latitude;
+                                    double lng = person.longitude;
+
+                                    int c;
+
+
+                                    if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
+                                        c = Color.GREEN;
+                                    }
+                                    else {
+                                        c = Color.GRAY;
+                                    }
+
+                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView, c));
+                                    Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
+                                    m.setTag(i);
+
+
+
+
                                 }
                             }
 
@@ -182,6 +208,45 @@ public class MapFragment extends Fragment {
                     }
                 });
 
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(final Marker marker) {
+                        ValueEventListener yeetListener = new ValueEventListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                //Todo:do what you need to do with dataSnapshot in here
+                            int refId = (int) marker.getTag();
+
+                            String title = (String) dataSnapshot.child("popups").child("" + refId).child("title").getValue();
+                            String bitmap = (String) dataSnapshot.child("popups").child("" + refId).child("bitmap").getValue();
+                            String tag = (String) dataSnapshot.child("popups").child("" + refId).child("tag").getValue();
+                            String x = (String) dataSnapshot.child("popups").child("" + refId).child("x").getValue();
+                            String y = (String) dataSnapshot.child("popups").child("" + refId).child("y").getValue();
+                                Intent myIntent = new Intent(getActivity(), ViewPopup.class);
+                                myIntent.putExtra("refId", refId);
+                                myIntent.putExtra("title", title);
+                                myIntent.putExtra("bitmap", bitmap);
+                                myIntent.putExtra("tag", tag);
+                                myIntent.putExtra("x", x);
+                                myIntent.putExtra("y", y);
+                                myIntent.putExtra("person", person);
+                                getActivity().startActivity(myIntent);
+                                //editor.putInt("refId", refId);
+                        //startActivity(new Intent(getActivity(), ViewPopup.class));*/
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+
+                        };
+
+                        dbRoot.addListenerForSingleValueEvent(yeetListener);
+                        return false;
+                    }
+                });
             }
         });
 
@@ -247,19 +312,21 @@ public class MapFragment extends Fragment {
         mMapView.onLowMemory();
     }
 
-    private Bitmap getCircleBitmap(Bitmap bitmap) {
+    private Bitmap getCircleBitmap(Bitmap bitmap, int c) {
         final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(output);
 
-        final int color = Color.RED;
+        final int color = c;
         final Paint paint = new Paint();
         final Rect rect = new Rect(0, 0, 200, 200);
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
+        paint.setStrokeWidth(5);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
+        paint.setStyle(Paint.Style.STROKE);
         canvas.drawOval(rectF, paint);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
@@ -269,4 +336,6 @@ public class MapFragment extends Fragment {
 
         return output;
     }
+
+
 }

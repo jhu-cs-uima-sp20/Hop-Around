@@ -27,9 +27,20 @@ public class CollectionFragment extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_collection, container, false);
         mPopupList = new ArrayList<>();
-        mPopupList.add(new PopupItem(R.drawable.ic_person, "Name 1"));
-        mPopupList.add(new PopupItem(R.drawable.ic_launcher_background, "Name 2"));
-        mPopupList.add(new PopupItem(R.drawable.ic_map, "Name 3"));
+        mPopupList.add(new PopupItem(R.drawable.ic_person, "Name 1", 0));
+        mPopupList.add(new PopupItem(R.drawable.ic_launcher_background, "Name 2", 1));
+        mPopupList.add(new PopupItem(R.drawable.ic_map, "Name 3", 2));
+
+
+        /*
+
+
+        for (int i = 0; i < ....) {
+            mPopupList.add(new PopupItem(image,  title, id ));
+        }
+        */
+
+
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);
         mRecyclerView.setHasFixedSize(true);
@@ -52,9 +63,7 @@ public class CollectionFragment extends Fragment {
     public void showDetailView(int position) {
         Intent intent = new Intent(getActivity(), ViewPopup.class);
         PopupItem item = mPopupList.get(position);
-        intent.putExtra("name", item.getName());
-        intent.putExtra("image", item.getImageResource());
-        intent.putExtra("position", position);
+        intent.putExtra("refId", item.getId());
         startActivity(intent);
     }
 }
