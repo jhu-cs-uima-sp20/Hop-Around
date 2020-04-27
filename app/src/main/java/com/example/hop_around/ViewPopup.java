@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -68,14 +69,22 @@ public class ViewPopup extends AppCompatActivity {
                 double lat = person.latitude;
                 double lng = person.longitude;
                 if (Math.abs(lat - latitude) > 0.00195175 && Math.abs(lng - longitude) > 0.00195175) {
-                    collect.setEnabled(false);
+                    collect.setEnabled(true);
+                    collect.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(ViewPopup.this, "You're out of range!", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
                 else {
                     collect.setEnabled(true);
                     collect.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //collect
+                            Toast.makeText(ViewPopup.this, "You got it!", Toast.LENGTH_LONG).show();
+                            int pointsForCollect = 7;
+                            //TODO: actually add points to user's hop points for collecting
                         }
                     });
                 }

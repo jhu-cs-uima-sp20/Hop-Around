@@ -228,6 +228,9 @@ public class PostActivity extends DialogFragment {
                 };
 
                 dbRoot.addListenerForSingleValueEvent(coolListener);
+
+                int pointsForPost = 7;
+                //TODO: actually add points to user's hop points for posting
             }
         });
 
