@@ -3,6 +3,9 @@ package com.example.hop_around;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -19,10 +22,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class ProfileFragment extends Fragment { //implements View.OnClickListener
@@ -31,7 +43,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        final View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         //EditTexts
         final EditText displayName = view.findViewById(R.id.profile_display_name);
@@ -42,9 +54,36 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
-
         //TODO: NEED TO LOAD THE USER'S DATA: Hop points, display name, description, recently collected display!
-            //read from firebase
+        ValueEventListener BigListener = new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int b = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
+                for (int i = 0; i < b; i++) {
+                    if (dataSnapshot.child("users").child(UID).hasChild("" + i)) {
+                        String title = (String) dataSnapshot.child("popups").child("" + i).child("title").getValue();
+                        String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
+                        //use title and bitmap to add to collected popups views
+                        //mPopupList.add(new PopupItem(StringToBitMap(bitmap), title, i));
+                        //mAdapter.notifyDataSetChanged();
+                    }
+                }
+                int pts = (int) dataSnapshot.child("users").child(UID).child("pts").getValue();
+                String display = ""+dataSnapshot.child("users").child(UID).child("displayName").getValue();
+                String description = ""+dataSnapshot.child("users").child(UID).child("description").getValue();
+                TextView name = view.findViewById(R.id.profile_display_name);
+                TextView desc = view.findViewById(R.id.profile_description);
+                TextView hpts = view.findViewById(R.id.disp);
+                name.setText(display);
+                desc.setText(description);
+                hpts.setText(pts);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        };
+        dbRoot.addListenerForSingleValueEvent(BigListener);
 
         //TODO in these onclicks: WRITE to firebase!!!
         //on clicks for editing display name, description, profile photo
@@ -141,7 +180,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
 
                         Intent editPic = new Intent(getActivity(), EditProfilePhotoActivity.class);
                         startActivity(editPic);
-                        successfulEdit(2);
+                        successfulEdit(2, "placeHolder");
             }
         });
 
