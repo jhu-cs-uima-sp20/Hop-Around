@@ -189,7 +189,6 @@ public class MapFragment extends Fragment {
 
                                     Bitmap original = getCircleBitmap(popUpView, c);
                                     Bitmap circle = getStrokeBitmap(original, c);
-                                    circle = getCircleBitmap(circle, c);
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(circle);
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
@@ -323,7 +322,7 @@ public class MapFragment extends Fragment {
         final int color = c;
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
-        final Rect rect = new Rect(0, 0, 200, 200);
+        final Rect rect = new Rect(0, 0, 100, 100);
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
@@ -356,7 +355,7 @@ public class MapFragment extends Fragment {
         final int color = c;
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
-        final Rect rect = new Rect(0, 0, 200, 200);
+        final Rect rect = new Rect(0, 0, 100, 100);
         final RectF rectS = new RectF(rect);
 
         paint.setAntiAlias(true);
@@ -365,7 +364,7 @@ public class MapFragment extends Fragment {
         paint.setColor(color);
         stroke.setColor(c);
         stroke.setStyle(Paint.Style.STROKE);
-        stroke.setStrokeWidth(90);
+        stroke.setStrokeWidth(30);
 
         canvas.drawOval(rectS, stroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
