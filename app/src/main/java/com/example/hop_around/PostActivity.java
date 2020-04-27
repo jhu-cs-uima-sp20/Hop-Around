@@ -57,6 +57,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+import static android.view.View.NO_ID;
+
 public class PostActivity extends DialogFragment {
     ArrayList<String> arrList = new ArrayList<>();
     ImageView postImg;
@@ -233,6 +235,8 @@ public class PostActivity extends DialogFragment {
                 if (postImg.getDrawable() == null) {
                     Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
                 } else if (popUpName.getText().toString().matches("")) {
+                    Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
+                } else if (idChip == NO_ID) {
                     Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
                 } else {
                     dbRoot.addListenerForSingleValueEvent(coolListener);
