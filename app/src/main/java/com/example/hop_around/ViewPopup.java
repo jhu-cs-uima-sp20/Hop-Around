@@ -62,7 +62,7 @@ public class ViewPopup extends AppCompatActivity {
                 TextView nameView = findViewById(R.id.popup_name);
                 nameView.setText(title);
 
-                Bitmap scaled = Bitmap.createScaledBitmap(popUpView, popUpView.getHeight() * 3, popUpView.getHeight() * 3, false);
+                Bitmap scaled = Bitmap.createScaledBitmap(popUpView, popUpView.getHeight() * 2, popUpView.getHeight() * 2, false);
 
                 TextView tagView = findViewById(R.id.popup_tag);
                 tagView.setText(tag);
