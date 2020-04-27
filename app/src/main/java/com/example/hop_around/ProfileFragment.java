@@ -20,6 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class ProfileFragment extends Fragment { //implements View.OnClickListener
 
@@ -35,6 +38,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         displayName.setEnabled(false);
         description.setEnabled(false);
 
+        final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
 
 
         //TODO: NEED TO LOAD THE USER'S DATA: Hop points, display name, description, recently collected display!
@@ -63,6 +67,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                             displayName.setEnabled(false);
                             successfulEdit(0);
                             //TODO write to Database, save data, maybe have a toast saying New Display Name Saved!
+
                                     //TODO put in a METHOD
                         }
                     }
