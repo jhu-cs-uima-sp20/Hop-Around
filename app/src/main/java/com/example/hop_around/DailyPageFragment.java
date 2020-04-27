@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -104,7 +105,9 @@ public class DailyPageFragment extends Fragment {
         PopupItem item = mPopupList.get(position);
         intent.putExtra("name", item.getName());
         intent.putExtra("image", item.getImageResource());
+        LatLng person = new LatLng(0.0, 0.0);
         intent.putExtra("position", position);
+        intent.putExtra("person", person);
         startActivity(intent);
     }
 
