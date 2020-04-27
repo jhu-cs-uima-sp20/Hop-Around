@@ -356,18 +356,18 @@ public class MapFragment extends Fragment {
         final Paint paint = new Paint();
         final Paint stroke = new Paint();
         final Rect rect = new Rect(0, 0, 200, 200);
-        final RectF rectS = new RectF(10, 10, 190, 190);
+        final RectF rectS = new RectF(0, 0, 200, 200);
 
         paint.setAntiAlias(true);
         stroke.setAntiAlias(true);
 
         paint.setColor(color);
-        stroke.setColor(Color.GREEN);
+        stroke.setColor(c);
         stroke.setStyle(Paint.Style.STROKE);
-        stroke.setStrokeWidth(100);
+        stroke.setStrokeWidth(30);
         canvas.drawOval(rectS, stroke);
 
-        canvas.drawBitmap(bitmap, rect, rect, stroke);
+        canvas.drawBitmap(bitmap, rect, rect, paint);
         bitmap.recycle();
 
         return output;
