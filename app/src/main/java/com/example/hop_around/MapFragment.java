@@ -313,29 +313,28 @@ public class MapFragment extends Fragment {
     }
 
     private Bitmap getCircleBitmap(Bitmap bitmap, int c) {
-        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth() + 20,
-                bitmap.getHeight() + 20, Bitmap.Config.ARGB_8888);
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(output);
 
         final int color = c;
         final Paint paint = new Paint();
         final Paint paintStroke = new Paint();
         final Rect rect = new Rect(0, 0, 200, 200);
-        final Rect rectStroke = new Rect(0, 0, 220, 220);
         final RectF rectF = new RectF(rect);
-        final RectF rectS = new RectF(rectStroke);
 
         paint.setAntiAlias(true);
-        paintStroke.setStyle(Paint.Style.STROKE);
-        paintStroke.setStrokeWidth(20);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
+        paintStroke.setStyle(Paint.Style.STROKE);
         paintStroke.setColor(color);
+
+        canvas.drawOval(rectF, paintStroke);
         canvas.drawOval(rectF, paint);
-        canvas.drawOval(rectS, paintStroke);
+
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rectStroke, rectStroke, paintStroke);
+        canvas.drawBitmap(bitmap, rect, rect, paintStroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
 
