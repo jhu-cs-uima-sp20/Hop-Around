@@ -325,17 +325,18 @@ public class MapFragment extends Fragment {
         final RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
+        stroke.setAntiAlias(true);
 
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
         stroke.setColor(color);
         stroke.setStyle(Paint.Style.STROKE);
+        stroke.setStrokeWidth(5);
         canvas.drawOval(rectF, stroke);
         canvas.drawOval(rectF, paint);
         canvas.drawOval(rectF, stroke);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        stroke.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, stroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
         canvas.drawBitmap(bitmap, rect, rect, stroke);
