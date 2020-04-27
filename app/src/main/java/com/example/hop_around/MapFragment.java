@@ -191,6 +191,7 @@ public class MapFragment extends Fragment {
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap(original, 50, 50));
 
 
+
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
 
