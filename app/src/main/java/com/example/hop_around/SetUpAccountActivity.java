@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -71,7 +72,7 @@ public class SetUpAccountActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
         final ImageView pic = findViewById(R.id.launch_editProfilePhoto);
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
@@ -89,11 +90,17 @@ public class SetUpAccountActivity extends AppCompatActivity {
         dbRoot.addListenerForSingleValueEvent(Listener);
 
         next = (Button) findViewById(R.id.next_btn);
+        final EditText disp = (EditText) findViewById(R.id.pts);
         next.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-
+                if(disp.getText() == null){
+                    dbRoot.child("users").child(UID).child("displayName").setValue("Anonymous User");
+                }
+                else{
+                    dbRoot.child("users").child(UID).child("displayName").setValue(disp.getText());
+                }
                 Intent next = new Intent(SetUpAccountActivity.this, LogInActivity.class);
                 startActivity(next);
             }
