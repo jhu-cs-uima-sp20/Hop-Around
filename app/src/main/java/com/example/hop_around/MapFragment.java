@@ -364,7 +364,7 @@ public class MapFragment extends Fragment {
         paint.setColor(color);
         stroke.setColor(c);
         stroke.setStyle(Paint.Style.STROKE);
-        stroke.setStrokeWidth(60);
+        stroke.setStrokeWidth(1000);
 
         canvas.drawOval(rectS, stroke);
         canvas.drawBitmap(bitmap, rect, rect, paint);
