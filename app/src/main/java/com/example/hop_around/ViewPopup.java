@@ -35,7 +35,7 @@ public class ViewPopup extends AppCompatActivity {
         setContentView(R.layout.activity_view_popup);
 
         Intent intent = getIntent();
-        int i = intent.getIntExtra("refId", 0);
+        final int i = intent.getIntExtra("refId", 0);
 
         ValueEventListener popupListener = new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
