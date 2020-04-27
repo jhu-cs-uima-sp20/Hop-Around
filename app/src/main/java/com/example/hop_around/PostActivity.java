@@ -53,7 +53,9 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Set;
 
@@ -141,6 +143,10 @@ public class PostActivity extends DialogFragment {
             Toast.makeText(getContext(), "missing fields", Toast.LENGTH_SHORT).show();
             post.setEnabled(false);
         }*/
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        final String UID = sharedPreferences.getString("UID", "kidPizza");
+
+
         post.setEnabled(true);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +159,10 @@ public class PostActivity extends DialogFragment {
                         int i =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
                         int b = i + 1;
                         dbRoot.child("popCount").setValue(b);
+
+                        int q =  Math.toIntExact((long)dataSnapshot.child("users").child(UID).child("pts").getValue());
+                        int c = q + 10;
+                        dbRoot.child("users").child(UID).child("pts").setValue(c);
                 }
 
                     @Override
@@ -188,11 +198,12 @@ public class PostActivity extends DialogFragment {
                         int i = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
                         popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
                         popupsRef.child(Integer.toString(i)).child("id").setValue(i);
-                        popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
-                        popupsRef.child(Integer.toString(i)).child("title").setValue(popUpTitle);
-
                         Bitmap bitmap = ((BitmapDrawable) postImg.getDrawable()).getBitmap();
 
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        String formattedDate = df.format(c.getTime());
+                        popupsRef.child(Integer.toString(i)).child("datePosted").setValue(formattedDate);
                         //final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
                         //final DatabaseReference popupsRef = dbRoot.child("popups");
                         String bitmapString = BitMapToString(bitmap);
@@ -242,8 +253,8 @@ public class PostActivity extends DialogFragment {
                     dbRoot.addListenerForSingleValueEvent(coolListener);
                     dbRoot.addListenerForSingleValueEvent(countListener);
                 }
-                int pointsForPost = 7;
-                //TODO: actually add points to user's hop points for posting
+                int pointsForPost = 10;
+                //TODO: actually add points to user's hop points for posting -- done in countListener
             }
         });
 
