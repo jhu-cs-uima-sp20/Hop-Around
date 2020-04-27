@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,11 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,13 +56,18 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int b = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
+                if (b > 3) {
+                    b = 3;
+                }
                 for (int i = 0; i < b; i++) {
                     if (dataSnapshot.child("users").child(UID).hasChild("" + i)) {
                         String title = (String) dataSnapshot.child("popups").child("" + i).child("title").getValue();
                         String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
-                        //use title and bitmap to add to collected popups views
-                        //mPopupList.add(new PopupItem(StringToBitMap(bitmap), title, i));
-                        //mAdapter.notifyDataSetChanged();
+                        String viewString = "profile_popup_"+(i+1);
+
+                        int id = getResources().getIdentifier(viewString, "id", "com.example.hop_around");
+                        ImageView one = view.findViewById(id);
+                        one.setImageBitmap(StringToBitMap(bitmap));
                     }
                 }
                 int pts = Math.toIntExact((long) dataSnapshot.child("users").child(UID).child("pts").getValue());
@@ -75,9 +76,11 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                 TextView name = view.findViewById(R.id.profile_display_name);
                 TextView desc = view.findViewById(R.id.profile_description);
                 TextView hpts = view.findViewById(R.id.disp);
+                TextView sentence = view.findViewById(R.id.display_names);
                 name.setText(display);
                 desc.setText(description);
                 hpts.setText("Hop Points: "+pts);
+                sentence.setText(display + "'s Recently Collected");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -265,5 +268,18 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         });
 
     }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
 
 }
