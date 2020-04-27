@@ -103,6 +103,7 @@ public class DailyPageFragment extends Fragment {
     public void showDetailView(int position) {
         Intent intent = new Intent(getActivity(), ViewPopup.class);
         PopupItem item = mPopupList.get(position);
+        intent.putExtra("refId", item.getId());
         intent.putExtra("name", item.getName());
         intent.putExtra("image", item.getImageResource());
         LatLng person = new LatLng(0.0, 0.0);
