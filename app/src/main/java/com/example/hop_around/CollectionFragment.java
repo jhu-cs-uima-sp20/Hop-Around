@@ -70,7 +70,7 @@ public class CollectionFragment extends Fragment {
             }
         };
         dbRoot.addListenerForSingleValueEvent(swagListener);
-        mPopupList.add(new PopupItem(StringToBitMap("bangohanwotabetai,ofuronihaitai,soretomo,watashi"), "title", 5));
+        //mPopupList.add(new PopupItem(StringToBitMap("bangohanwotabetai,ofuronihaitai,soretomo,watashi"), "title", 5)); DUMMY FOR TESTING
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
