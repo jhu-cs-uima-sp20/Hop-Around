@@ -80,7 +80,7 @@ public class ViewPopup extends AppCompatActivity {
                 else{
                     active.setText("Inactive");
                 }
-                TextView poster = findViewById(R.id.posted_by);
+                TextView poster = findViewById(R.id.posted_user);
                 poster.setText(""+dataSnapshot.child("popups").child(""+i).child("postedBy").getValue());
                 TextView nameView = findViewById(R.id.popup_name);
                 nameView.setText(title);
