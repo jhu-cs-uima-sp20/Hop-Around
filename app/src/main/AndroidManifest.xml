@@ -26,7 +26,9 @@
 
         <activity
             android:name=".MapFragment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -43,7 +45,9 @@
         <activity
 
             android:name=".LogInActivity"
-            android:label="LogIn">
+            android:label="LogIn"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,25 +57,41 @@
         <activity
             android:name=".MapsView"
             android:label="Map"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize">
 
         </activity>
         <activity
             android:name=".NavigationDrawerActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize">
 
         </activity>
-        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".CreateAccountActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
 
-        <activity android:name=".EditProfilePhotoActivity" />
-        <activity android:name=".SetUpAccountActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".EditProfilePhotoActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".SetUpAccountActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".ForgotPasswordActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".TermsAndServices" />
-        <activity android:name=".PostActivity" />
+        <activity android:name=".PostActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ViewPopup"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
     </application>
 
 </manifest>
