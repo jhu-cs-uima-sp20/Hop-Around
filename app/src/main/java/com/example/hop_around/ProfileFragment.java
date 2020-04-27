@@ -66,6 +66,7 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                         else{
                             displayName.setEnabled(false);
                             successfulEdit(0);
+                            Toast.makeText(getContext(), "New Display Name Saved!", Toast.LENGTH_LONG).show();
                             //TODO write to Database, save data, maybe have a toast saying New Display Name Saved!
 
                                     //TODO put in a METHOD
