@@ -189,7 +189,7 @@ public class MapFragment extends Fragment {
 
                                     Bitmap original = getCircleBitmap(popUpView, c);
                                     Bitmap circle = getStrokeBitmap(original, c);
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(original);
+                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(circle);
                                     Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
                                     m.setTag(i);
 
