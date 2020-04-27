@@ -1,6 +1,7 @@
 package com.example.hop_around;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,6 +37,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -153,13 +155,13 @@ public class MapFragment extends Fragment {
                                     editor.commit();
 
                                 }*/
-                                int b =  Math.toIntExact((long)dataSnapshot.child("popCount").getValue());
+                                int b = Math.toIntExact((long) dataSnapshot.child("popCount").getValue());
 
-                                for (int i = 0; i <= b; i++) {
-                                    String bitmap = (String) dataSnapshot.child("popups").child(""+i).child("bitmap").getValue();
-                                    String tag = (String) dataSnapshot.child("popups").child(""+i).child("tag").getValue();
-                                    String x = (String) dataSnapshot.child("popups").child(""+i).child("x").getValue();
-                                    String y = (String) dataSnapshot.child("popups").child(""+i).child("y").getValue();
+                                for (int i = 0; i < b; i++) {
+                                    String bitmap = (String) dataSnapshot.child("popups").child("" + i).child("bitmap").getValue();
+                                    String tag = (String) dataSnapshot.child("popups").child("" + i).child("tag").getValue();
+                                    String x = (String) dataSnapshot.child("popups").child("" + i).child("x").getValue();
+                                    String y = (String) dataSnapshot.child("popups").child("" + i).child("y").getValue();
 
                                     Bitmap popUpView = StringToBitMap(bitmap);
                                     Double latitude = Double.parseDouble(x);
@@ -167,7 +169,8 @@ public class MapFragment extends Fragment {
                                     LatLng position = new LatLng(latitude, longitude);
 
                                     BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getCircleBitmap(popUpView));
-                                    googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
+                                    Marker m = googleMap.addMarker(new MarkerOptions().position(position).snippet(tag).icon(icon));
+                                    m.setTag(i);
                                 }
                             }
 
@@ -182,6 +185,19 @@ public class MapFragment extends Fragment {
                     }
                 });
 
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        /*int refId = (int) marker.getTag();
+                        String bitmap = (String) dataSnapshot.child("popups").child("" + refId).child("bitmap").getValue();
+                        String tag = (String) dataSnapshot.child("popups").child("" + refId).child("tag").getValue();
+                        String x = (String) dataSnapshot.child("popups").child("" + refId).child("x").getValue();
+                        String y = (String) dataSnapshot.child("popups").child("" + refId).child("y").getValue();
+                        //editor.putInt("refId", refId);
+                        //startActivity(new Intent(getActivity(), ViewPopup.class));*/
+                        return false;
+                    }
+                });
             }
         });
 
