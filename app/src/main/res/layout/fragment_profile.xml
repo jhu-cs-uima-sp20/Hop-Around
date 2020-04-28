@@ -9,11 +9,10 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="155dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
+        android:gravity="center"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <EditText
@@ -22,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_photo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:editable="true"
         android:maxLength="15"
         android:text="@string/display_name"
@@ -33,46 +32,48 @@
         android:id="@+id/edit_display_name_btn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/profile_photo"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="27dp"
+        android:layout_alignTop="@+id/profile_display_name"
+        android:layout_alignBottom="@+id/profile_display_name"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
         android:layout_toEndOf="@+id/profile_display_name"
         android:clickable="true"
+        android:gravity="center"
         app:srcCompat="@android:drawable/ic_menu_edit" />
+
 
     <TextView
         android:id="@+id/disp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_display_name"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="8dp"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:text="@string/hop_points_profile" />
 
     <TextView
         android:id="@+id/profile_points_number"
-        android:layout_width="wrap_content"
+        android:layout_width="27dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_display_name"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="130dp"
+        android:layout_alignTop="@+id/disp"
+        android:layout_alignBottom="@+id/disp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/disp"
         android:text="@string/hop_points_number" />
 
     <EditText
         android:id="@+id/profile_description"
-        android:layout_width="244dp"
-        android:layout_height="179dp"
-        android:layout_alignBottom="@+id/display_names"
-        android:layout_alignParentStart="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="87dp"
-        android:layout_marginBottom="78dp"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
+        android:layout_below="@+id/disp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:background="@color/colorPrimaryDark"
-        android:editable="true"
         android:maxLength="150"
         android:text="@string/filler" />
 
@@ -80,62 +81,58 @@
         android:id="@+id/edit_description_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/disp"
-        android:layout_alignBottom="@+id/display_names"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="294dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="87dp"
-        android:layout_marginBottom="225dp"
+        android:layout_alignTop="@+id/profile_description"
+        android:layout_alignBottom="@+id/profile_description"
+        android:layout_toEndOf="@+id/profile_description"
         android:clickable="true"
+        android:gravity="center"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <TextView
         android:id="@+id/display_names"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/profile_popup_1"
+        android:layout_above="@+id/collection_profile"
         android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="142dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/display_name"
         android:textSize="18sp"
         android:visibility="visible" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_popup_1"
-        android:layout_width="102dp"
-        android:layout_height="103dp"
-        android:layout_alignParentStart="true"
+    <LinearLayout
+        android:id="@+id/collection_profile"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
-        android:layout_toStartOf="@+id/profile_popup_2"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_popup_2"
-        android:layout_width="107dp"
-        android:layout_height="101dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_popup_3"
-        android:layout_width="104dp"
-        android:layout_height="101dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="49dp"
-        android:layout_toEndOf="@+id/profile_popup_2"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_popup_1"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
 
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_popup_2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_popup_3"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>
