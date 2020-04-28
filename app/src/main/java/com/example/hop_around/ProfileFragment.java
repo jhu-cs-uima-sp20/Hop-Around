@@ -55,7 +55,8 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
-        //TODO: NEED TO LOAD THE USER'S DATA: Hop points, display name, description, recently collected display!
+
+        //LOAD THE USER'S DATA: Hop points, display name, description, recently collected display!
         ValueEventListener BigListener = new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -199,11 +200,8 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
             }
         });
 
-
-
-        //TODO: need to add SEARCH BAR/SEARCH ACTIVITY
-        setHasOptionsMenu(true); //THIS MAKES SEARCH VISIBLE FOR ALL THE FRAGMENTS
-        //setMenuVisibility(true);
+        //add search bar
+        setHasOptionsMenu(true);
 
         return view;
     }
@@ -218,7 +216,6 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         final String UID = sharedPreferences.getString("UID", "kidPizza");
 
-        //TODO SAVE EDITED FIELD TO FIREBASE DB
 
         if (field == 0) { //displayName
             text = "New Display Name Saved";
@@ -231,8 +228,6 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
         else if (field == 2) { //profilePhoto
             text = "New Profile Photo Saved";
             //dbRoot.child("users").child(UID).child("pfp").setValue(S);
-            //TODO need to re-update profile photo/display the new one if not happening automatically
-                //DON'T NEED TO SAVE TO DB, because edit profile activity already does.
         }
 
         Toast toast = Toast.makeText(context, text, duration);
@@ -242,8 +237,6 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        //inflater.inflate(R.menu.search_menu, menu);
-        //super.onCreateOptionsMenu(menu, inflater);
 
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
@@ -259,7 +252,6 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
             @Override
             public boolean onQueryTextSubmit(final String query) {
                 //user presses enter
-                //TODO SEARCH DATABASE FOR NAME
 
                 //SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
                 //final String UID = sharedPreferences.getString("UID", "kidPizza");
@@ -268,9 +260,12 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child("users").hasChild(query)){
+                        if(dataSnapshot.child("users").hasChild(query)){ //TODO wont work because query is displayName
                             //.putExtraString(query)
                             //launch activity other profile
+                            Intent intent = new Intent(getActivity(), OtherProfileActivity.class);
+                            intent.putExtra("displayName", query);
+                            startActivity(intent);
                         }
                         else{
                             //do nothing
@@ -284,11 +279,15 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                 dbRoot.addListenerForSingleValueEvent(swagListener);
 
 
+                //Intent intent = new Intent(getActivity(), OtherProfileActivity.class);
+                //intent.putExtra("query", query);
+                //startActivity(intent);
+
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                //user types a new character, TODO should search suggestions should be updated?
+                //user types a new character
                 return false;
             }
         });
