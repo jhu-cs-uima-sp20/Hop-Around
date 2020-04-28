@@ -32,7 +32,7 @@ public class OtherProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String displayName = intent.getStringExtra("displayName");
-
+        final String UID = intent.getStringExtra("uid");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(displayName+"'s Profile"); //TODO set with query string passed through intent
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -42,8 +42,6 @@ public class OtherProfileActivity extends AppCompatActivity {
 
         final DatabaseReference dbRoot = FirebaseDatabase.getInstance().getReference();
         SharedPreferences sharedPreferences = this.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        //final String UID = sharedPreferences.getString("UID", "kidPizza");
-        final String UID = displayName; //TODO fix this is wrong
 
         //LOAD THE USER'S DATA: Hop points, display name, description, recently collected display!
         ValueEventListener BigListener = new ValueEventListener() {

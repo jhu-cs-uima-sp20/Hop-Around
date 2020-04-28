@@ -260,18 +260,21 @@ public class ProfileFragment extends Fragment { //implements View.OnClickListene
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child("users").hasChild(query)){ //TODO wont work because query is displayName
-                            //.putExtraString(query)
-                            //launch activity other profile
-                            Intent intent = new Intent(getActivity(), OtherProfileActivity.class);
-                            intent.putExtra("displayName", query);
-                            startActivity(intent);
+                        for (DataSnapshot snapshot : dataSnapshot.child("users").getChildren()) {
+                            if(snapshot.child("displayName").getValue().equals(query)) {
+                                //launch activity other profile
+                                String UID = snapshot.getKey();
+                                Intent intent = new Intent(getActivity(), OtherProfileActivity.class);
+                                intent.putExtra("displayName", query);
+                                intent.putExtra("uid", UID);
+                                startActivity(intent);
+                            }
+                            else{
+                                //do nothing
+                            }
                         }
-                        else{
-                            //do nothing
-                        }
-                    }
 
+                    }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
